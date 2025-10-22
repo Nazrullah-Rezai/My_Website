@@ -1,0 +1,77 @@
+/* .Navbar {
+  position: sticky;
+  background-color: var(--nav-color);
+} */
+.Navbar .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Navbar-container {
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.Navbar-flex {
+  max-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Logo-wrapper {
+  transform: scale(0.6);
+}
+.Navbar .Logo-wrapper img {
+  width: 50;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.Navbar .Nav-items {
+  display: flex;
+  gap: 1.5rem;
+}
+.Navbar .Nav-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.Navbar .Nav-items img {
+  display: none;
+}
+@media (max-width: 768px) {
+  .Navbar .Nav-items {
+    display: none;
+  }
+  .Navbar .Nav-items img {
+  
+    display: block;
+    height: 30px;
+    width: 30px;
+    background-color: white;
+  }
+}
+
+/* @media (max-width: 768px) {
+  .Navbar .Nav-Mobile-items {
+    display: flex;
+  }
+  .Navbar .Nav-items {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .Nav-Mobile-items {
+    display: none;
+  }
+  .Navbar .Mobile-flex {
+    display: none;
+  }
+}  */
