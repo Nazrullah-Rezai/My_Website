@@ -1,7 +1,12 @@
-/* .Navbar {
+.Navbar {
   position: sticky;
+  top: 0;
   background-color: var(--nav-color);
-} */
+  width: 100%;
+  height: 4.5em;
+  border-radius: 5px;
+  padding-top: 8px;
+}
 .Navbar .flex {
   display: flex;
   align-items: center;
@@ -10,7 +15,7 @@
 
 .Navbar-container {
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 30px 0 50px;
 }
 
 .Navbar-flex {
@@ -19,19 +24,59 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .Logo-wrapper {
   transform: scale(0.6);
 }
 .Navbar .Logo-wrapper img {
-  width: 50;
-  height: 50px;
-  border-radius: 10px;
+  width: 100px;
+  height: 90px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.Navbar .Logo-wrapper::after,
+.Navbar .Logo-wrapper::before {
+  content: "";
+  position: absolute;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  background-color: conic-gradient(from var(--nr-color), transparent 30%,  #e4d588, #c2a662, #ad8849, #916027, #e4d588);
+  background-image: conic-gradient(from var(--angle), transparent 70%,  #e4d588, #c2a662, #ad8849, #916027, #e4d588);
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  padding: 0 3px;
+  animation: spin 3s linear infinite;
+}
+
+.Navbar .Logo-wrapper::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
 }
 
 .Navbar .Nav-items {
   display: flex;
   gap: 1.5rem;
 }
+
 .Navbar .Nav-btn {
   background: none;
   border: none;
@@ -40,38 +85,40 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  position: relative;
 }
 
-.Navbar .Nav-items img {
+.Navbar .Nav-btn:hover {
+  color: var(--btn-color);
+}
+.Navbar .Nav-btn::before {
+  content: "";
+  background-color: var(--nr-color);
+  width: 0;
+
+  height: 1px;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  transition: all 0.3s;
+}
+.Navbar .Nav-btn:hover::before {
+  width: 100%; 
+}
+
+.Navbar .Nav-items .sidebar-icon {
+  width: 30px;
+  background-color: var(--nr-color);
+  border-radius: 5px;
   display: none;
+  cursor: pointer;
 }
+
 @media (max-width: 768px) {
-  .Navbar .Nav-items {
+  .Navbar .Nav-items button {
     display: none;
   }
-  .Navbar .Nav-items img {
-  
+  .Navbar .Nav-items .sidebar-icon {
     display: block;
-    height: 30px;
-    width: 30px;
-    background-color: white;
   }
 }
-
-/* @media (max-width: 768px) {
-  .Navbar .Nav-Mobile-items {
-    display: flex;
-  }
-  .Navbar .Nav-items {
-    display: none;
-  }
-}
-
-@media (min-width: 1024px) {
-  .Nav-Mobile-items {
-    display: none;
-  }
-  .Navbar .Mobile-flex {
-    display: none;
-  }
-}  */

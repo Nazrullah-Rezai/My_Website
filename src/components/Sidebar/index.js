@@ -1,6 +1,7 @@
 const Sidebar = () => {
+  
   return (
-    <aside>
+        <aside id="sidebar" >
       <h2>Sidebar</h2>
     </aside>
   );

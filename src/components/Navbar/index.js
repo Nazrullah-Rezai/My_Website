@@ -3,11 +3,11 @@ import "./Navbar.css";
 import { useState, useEffect } from "react";
 import nrLogo from "../../assets/images/nrLogo.png";
 import sidebarMenu from "../../assets/icons/Sidebar-Menu.svg";
+import { toggleSidebar } from "../../utils";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
-
   const navItems = [
     { id: 1, name: "Home", href: "#home" },
     { id: 2, name: "About", href: "#about" },
@@ -17,22 +17,22 @@ const NavBar = () => {
     { id: 6, name: "Contact", href: "#contact" },
   ];
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const isScrolled = window.scrollY > 20;
-  //     setScrolled(isScrolled);
-  //   };
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
+    };
 
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  // const handleItemClick = (section) => {
-  //   setActiveSection(section);
-  //   setIsOpen(false);
-  //   const element = document.getElementById(section);
-  //   element?.scrollIntoView({ behavior: "smooth" });
-  // };
+  const handleItemClick = (section) => {
+    setActiveSection(section);
+    setIsOpen(false);
+    const element = document.getElementById(section);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <nav
@@ -68,7 +68,12 @@ const NavBar = () => {
                 <span className="underline" />
               </button>
             ))}
-            <img src={sidebarMenu} alt="" />
+            <img
+              className="sidebar-icon"
+              src={sidebarMenu}
+              alt=""
+              onClick={() => toggleSidebar()}
+            />
           </div>
 
           {/* <div className="Mobile-flex">
