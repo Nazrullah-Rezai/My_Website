@@ -6,22 +6,24 @@
   --font-family: "Arial", sans-serif;
   --font-size: 16px;
   --line-height: 1.5;
-  --main-color: #323232;
-  --nav-color: #ffffff;
+  --text-color: #ffffff;
+  --btn-color: #c2a662;
   --btn-color: #0b0d25;
-  --main-color: #191527;
+  --main-color: #1f2731;
   --nr-color: #e4d588;
+  --liniar-gradient-color: #c2a662, #ad8849, #aa702e, #81742f;
+  --box-shodow-color: var(--text-color);
 }
 
 #root {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 300px;
-  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto auto;
   grid-template-areas:
     "navbar navbar"
-    "main sidebar"
-    "footer sidebar";
+    "main main"
+    "footer footer";
 }
 
 body {
@@ -44,11 +46,10 @@ main {
 
 aside {
   height: calc(100vh - 80px);
-  position: sticky;
   align-self: start;
   top: 80px;
-  grid-area: sidebar;
   background-color: gray;
+  display: block;
 }
 
 footer {
@@ -61,21 +62,29 @@ footer {
   #root {
     grid-template-columns: 1fr;
   }
+
   aside {
     position: fixed;
     right: 0;
     width: 90%;
     background-color: rgba(7, 6, 6, 0.753);
-    transform: translateX(100%); /* Initial versteckt */
-    transition: transform 700ms ease-in-out; /* Transition im Basis-Element */
+    transform: translateX(100%);
+    transition: transform 700ms ease-in-out;
   }
-  .showSidebar aside {
-    transform: translateX(0); /* Zeigt die Sidebar */
+  .showSidebar .navbar {
+   
+    transform: translateX(0);
+    position: fixed;
+    right: 0;
+    width: 90%;
+    background-color: rgba(7, 6, 6, 0.753);
+    transform: translateX(100%);
+    transition: transform 700ms ease-in-out;
   }
 }
 
 .BubbleButton {
-  background-color: var(--btn-color);
+  background-image: linear-gradient(var(--liniar-gradient-color));
   margin-left: 50%;
   position: relative;
   height: 40px;
@@ -83,16 +92,16 @@ footer {
   border-radius: 10px;
   border: none;
   outline: none;
-  color: #fff;
+  color: var(--nr-color);
   font-weight: bold;
   cursor: pointer;
   text-shadow: 0 0 5px #343a40;
-  box-shadow: 0 0 1em 0.1em #ffff42;
 }
 
 .BubbleButton:active {
   transform: scale(0.98);
 }
+
 .BubbleButton::before,
 .BubbleButton::after {
   content: "";
@@ -175,7 +184,7 @@ footer {
 /* dark mode  based on System Preferences */
 @media (prefers-color-scheme: dark) {
   * {
-    --main-color: #353839;
+    --main-color: #1f2731;
     --btn-color: #f2f0ef;
     --nav-color: #1f2021;
   }

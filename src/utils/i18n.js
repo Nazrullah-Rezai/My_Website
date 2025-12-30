@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
-// Very small i18n utility with context-based provider and a <Translate id /> component
-
 const I18nContext = createContext({ t: (k) => k });
 
 export function I18nProvider({ translations, defaultLang = "en", children }) {

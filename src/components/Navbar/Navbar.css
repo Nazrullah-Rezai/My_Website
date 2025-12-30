@@ -1,7 +1,7 @@
 .Navbar {
   position: sticky;
   top: 0;
-  background-color: var(--nav-color);
+  background-color: var(--main-color);
   width: 100%;
   height: 4.5em;
   border-radius: 5px;
@@ -29,12 +29,15 @@
   transform: scale(0.6);
 }
 .Navbar .Logo-wrapper img {
-  width: 100px;
+  width: 120px;
   height: 90px;
   position: relative;
   border-radius: 5px;
 }
 
+.Logo-wrapper:hover {
+  transform: scale(0.8);
+}
 .Navbar .Logo-wrapper::after,
 .Navbar .Logo-wrapper::before {
   content: "";
@@ -42,8 +45,15 @@
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  background-color: conic-gradient(from var(--nr-color), transparent 30%,  #e4d588, #c2a662, #ad8849, #916027, #e4d588);
-  background-image: conic-gradient(from var(--angle), transparent 70%,  #e4d588, #c2a662, #ad8849, #916027, #e4d588);
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 70%,
+    #e4d588,
+    #c2a662,
+    #ad8849,
+    #916027,
+    #e4d588
+  );
   left: 50%;
   top: 47%;
   transform: translate(-50%, -50%);
@@ -89,13 +99,12 @@
 }
 
 .Navbar .Nav-btn:hover {
-  color: var(--btn-color);
+  color: var(--nr-color);
 }
 .Navbar .Nav-btn::before {
   content: "";
   background-color: var(--nr-color);
   width: 0;
-
   height: 1px;
   position: absolute;
   bottom: -10px;
@@ -103,7 +112,7 @@
   transition: all 0.3s;
 }
 .Navbar .Nav-btn:hover::before {
-  width: 100%; 
+  width: 100%;
 }
 
 .Navbar .Nav-items .sidebar-icon {
@@ -115,10 +124,21 @@
 }
 
 @media (max-width: 768px) {
-  .Navbar .Nav-items button {
-    display: none;
+  .Navbar .Nav-items {
+    position: absolute;
+    right: 0;
+    height: auto;
+    padding: 10rem 0 1rem 0;
+    gap: 1rem;
+    flex-direction: column;
+    background-color: rgba(12, 208, 55, 0.636);
+    width: 70%;
   }
-  .Navbar .Nav-items .sidebar-icon {
-    display: block;
+  .Navbar .Nav-btn::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .Navbar .Nav-btn:hover::before {
+    width: 20%;
   }
 }

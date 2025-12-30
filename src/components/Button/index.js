@@ -14,15 +14,12 @@ const Button = ({
 
   const handleClick = useCallback(
     (e) => {
-      // eigene Animation triggern
       if (btnRef.current) {
         btnRef.current.classList.add("buttonAnimation");
-        // Dauer passend zu CSS-Animation (1.5-2s)
         setTimeout(() => {
           btnRef.current && btnRef.current.classList.remove("buttonAnimation");
         }, 1600);
       }
-      // externen onClick weiterreichen
       if (onClick) onClick(e);
     },
     [onClick]
@@ -31,7 +28,7 @@ const Button = ({
   return (
     <button
       ref={btnRef}
-      className={`TAXGOButton ${className || ""}`.trim()}
+      className={`BubbleButton ${className || ""}`.trim()}
       id={id}
       onClick={handleClick}
       hidden={hidden}

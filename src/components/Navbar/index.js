@@ -16,7 +16,6 @@ const NavBar = () => {
     { id: 5, name: "Blog", href: "#blog" },
     { id: 6, name: "Contact", href: "#contact" },
   ];
-
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
