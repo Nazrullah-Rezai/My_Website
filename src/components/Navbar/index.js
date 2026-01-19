@@ -1,116 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
-import { useState, useEffect } from "react";
-import nrLogo from "../../assets/images/nrLogo.png";
-import sidebarMenu from "../../assets/icons/Sidebar-Menu.svg";
-import { toggleSidebar } from "../../utils";
+
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
-  const navItems = [
-    { id: 1, name: "Home", href: "#home" },
-    { id: 2, name: "About", href: "#about" },
-    { id: 3, name: "Services", href: "#services" },
-    { id: 4, name: "Portfolio", href: "#portfolio" },
-    { id: 5, name: "Blog", href: "#blog" },
-    { id: 6, name: "Contact", href: "#contact" },
-  ];
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
-    };
+  const navItems = ["About", "Work", "Skills", "Contact"];
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleItemClick = (section) => {
-    setActiveSection(section);
-    setIsOpen(false);
-    const element = document.getElementById(section);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav
-      className={`Navbar${scrolled ? " scrolled" : ""}`}
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="Navbar-container">
-        <div className="Navbar-flex">
-          <div className="Logo-wrapper">
-            <img
-              src={nrLogo}
-              alt="Logo"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/32";
-              }}
-            />
-          </div>
+    <>
+      <nav className="navbar">
+        <div className="navbar-inner">
+          <a href="#home" className="navbar-logo">Nazrullah Rezai</a>
 
-          <div className="Nav-items">
+          <div className="navbar-links">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                className={`Nav-btn${
-                  activeSection === item.name.toLowerCase() ? " active" : ""
-                }`}
-                aria-current={
-                  activeSection === item.name.toLowerCase() ? "page" : undefined
-                }
-              >
-                {item.name}
-                <span className="underline" />
-              </button>
+              <button key={item}>{item}</button>
             ))}
-            <img
-              className="sidebar-icon"
-              src={sidebarMenu}
-              alt=""
-              onClick={() => toggleSidebar()}
-            />
+            <button className="navbar-cta">Hire Me</button>
           </div>
 
-          {/* <div className="Mobile-flex">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="menu-toggle"
-              aria-expanded={isOpen}
-              aria-label="Toggle navigation menu"
-            >
-              {isOpen ? (
-                <FiX className="menu-icon" />
-              ) : (
-                <FiMenu className="menu-icon" />
-              )}
-            </button>
-          </div> */}
+          <button
+            className={`menu-toggle ${isOpen ? 'open' : ''}`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-      </div>
+      </nav>
 
-      {/* <div className={`Nav-Mobile-items${isOpen ? " open" : ""}`}>
-        <div className="Nav-Mobile-flex">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleItemClick(item.name.toLowerCase())}
-              className={`menu-button${
-                activeSection === item.name.toLowerCase() ? " active" : ""
-              }`}
-              aria-current={
-                activeSection === item.name.toLowerCase() ? "page" : undefined
-              }
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-      </div> */}
-    </nav>
+      <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
+        {navItems.map((item) => (
+          <button key={item} onClick={closeMenu}>{item}</button>
+        ))}
+        <button className="mobile-cta" onClick={closeMenu}>Hire Me</button>
+      </div>
+    </>
   );
 };
 

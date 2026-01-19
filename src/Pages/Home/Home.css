@@ -1,37 +1,206 @@
-.Home {
+.hero {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.Portfolio {
+/* Subtle gradient background */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  height: 100%;
-  margin: 2em;
+  max-width: 1200px;
+  height: 60%;
+  background: radial-gradient(ellipse at top, rgba(41, 151, 255, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gray);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  max-width: 900px;
+}
+
+.hero-title .gradient {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: var(--gray);
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 30px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.hero-btn-primary {
+  background: var(--white);
+  color: var(--bg);
+}
+
+.hero-btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 40px rgba(255, 255, 255, 0.15);
+}
+
+.hero-btn-secondary {
+  background: transparent;
+  color: var(--blue);
+  border: none;
+  padding: 1rem 0.5rem;
+}
+
+.hero-btn-secondary:hover {
+  text-decoration: underline;
+}
+
+.hero-btn-secondary span {
+  transition: transform 0.2s;
+}
+
+.hero-btn-secondary:hover span {
+  transform: translateX(4px);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray);
+  font-size: 0.75rem;
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator::after {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gray), transparent);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Features grid */
+.features {
+  padding: 6rem 2rem;
+  background: var(--bg-elevated);
+}
+
+.features-inner {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.features-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 4rem;
+}
+
+.features-grid {
   display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "portfolio-text portfolio-myImage";
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
-.portfolio-text {
-  padding: 2em;
-  width: auto;
-  padding-top: 10%;
-  grid-area: portfolio-text;
+.feature-card {
+  text-align: center;
+  padding: 2rem;
 }
 
-.portfolio-text h3 {
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
-.portfolio-text p {
-  padding: 1em 0;
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
-.portfolio-text .btn-info {
-    
+
+.feature-desc {
+  font-size: 0.95rem;
+  color: var(--gray);
+  line-height: 1.6;
 }
-.portfolio-myImage {
-  grid-area: portfolio-myImage;
-  background-color: transparent;
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 8rem 1.5rem 6rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
