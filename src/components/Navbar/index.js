@@ -1,21 +1,27 @@
 import React from "react";
 import "./Navbar.css";
 import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import nrLogo from "../../assets/images/nrLogo.png";
-import sidebarMenu from "../../assets/icons/Sidebar-Menu.svg";
-import { toggleSidebar } from "../../utils";
+import { FiMenu, FiX } from "react-icons/fi";
+
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const navItems = [
-    { id: 1, name: "Home", href: "#home" },
+    { id: 1, name: "Home", href: "/" },
     { id: 2, name: "About", href: "#about" },
     { id: 3, name: "Services", href: "#services" },
     { id: 4, name: "Portfolio", href: "#portfolio" },
     { id: 5, name: "Blog", href: "#blog" },
     { id: 6, name: "Contact", href: "#contact" },
+    { id: 7, name: "Imprint", href: "/imprint" },
+    { id: 8, name: "Privacy", href: "/privacy" },
   ];
+
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
@@ -26,11 +32,24 @@ const NavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleItemClick = (section) => {
-    setActiveSection(section);
-    setIsOpen(false);
-    const element = document.getElementById(section);
-    element?.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (e, href) => {
+    setIsMenuOpen(false);
+    
+    // Wenn es ein Hash-Link ist und wir auf der Startseite sind
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate("/");
+      }
+      // SetTimeout für die Navigation
+      setTimeout(() => {
+        const id = href.slice(1);
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      e.preventDefault();
+    }
   };
 
   return (
@@ -52,66 +71,49 @@ const NavBar = () => {
             />
           </div>
 
-          <div className="Nav-items">
+          <div className={`Nav-items ${isMenuOpen ? "mobile-open" : ""}`}>
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                className={`Nav-btn${
-                  activeSection === item.name.toLowerCase() ? " active" : ""
-                }`}
-                aria-current={
-                  activeSection === item.name.toLowerCase() ? "page" : undefined
-                }
-              >
-                {item.name}
-                <span className="underline" />
-              </button>
+              item.href.startsWith("/") ? (
+                <Link
+                  key={item.id}
+                  to={item.href}
+                  className="Nav-btn"
+                  onClick={handleNavClick}
+                >
+                  {item.name}
+                  <span className="underline" />
+                </Link>
+              ) : (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  className="Nav-btn"
+                  onClick={(e) => handleNavClick(e, item.href)}
+                >
+                  {item.name}
+                  <span className="underline" />
+                </a>
+              )
             ))}
-            <img
-              className="sidebar-icon"
-              src={sidebarMenu}
-              alt=""
-              onClick={() => toggleSidebar()}
-            />
           </div>
 
-          {/* <div className="Mobile-flex">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="menu-toggle"
-              aria-expanded={isOpen}
-              aria-label="Toggle navigation menu"
-            >
-              {isOpen ? (
-                <FiX className="menu-icon" />
-              ) : (
-                <FiMenu className="menu-icon" />
-              )}
-            </button>
-          </div> */}
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? (
+              <FiX className="menu-icon" size={24} />
+            ) : (
+              <FiMenu className="menu-icon" size={24} />
+            )}
+          </button>
         </div>
       </div>
-
-      {/* <div className={`Nav-Mobile-items${isOpen ? " open" : ""}`}>
-        <div className="Nav-Mobile-flex">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleItemClick(item.name.toLowerCase())}
-              className={`menu-button${
-                activeSection === item.name.toLowerCase() ? " active" : ""
-              }`}
-              aria-current={
-                activeSection === item.name.toLowerCase() ? "page" : undefined
-              }
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-      </div> */}
     </nav>
   );
 };
+
 
 export default NavBar;

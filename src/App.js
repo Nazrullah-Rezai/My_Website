@@ -1,17 +1,20 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-function App() {
-  const renderPage = (Component, name) => {
-    document.title = `TaxGo - ${name}`;
-    return <Component />;
-  };
+import Imprint from "./Pages/Imprint";
+import Privacy from "./Pages/Privacy";
 
+function App() {
   return (
     <>
       <Navbar />
-      <Main />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/imprint" element={<Imprint />} />
+        <Route path="/privacy" element={<Privacy />} />
+      </Routes>
       <Footer />
     </>
   );
