@@ -5,6 +5,56 @@
   min-height: 100vh;
 }
 
+:root.light-theme .Contact {
+  background: linear-gradient(135deg, #f4e9ae 0%, #e4d588 100%);
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .contact-header h1 {
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .contact-header .subtitle {
+  color: #2f3a4a;
+}
+
+:root.light-theme .Contact .contact-info h2 {
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .contact-info h2,
+:root.light-theme .Contact .info-card h3 {
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .info-card p {
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .info-card {
+  background: #fff;
+  border: 1px solid #1f2731;
+  box-shadow: 0 12px 28px rgba(31, 39, 49, 0.12);
+}
+
+:root.light-theme .Contact .info-card:hover {
+  background: #f4e9ae;
+  border-color: #1f2731;
+  box-shadow: 0 14px 32px rgba(31, 39, 49, 0.18);
+}
+
+:root.light-theme .Contact .info-icon {
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .info-card h3 {
+  color: #1f2731;
+}
+
+:root.light-theme .Contact .info-card p {
+  color: #1f2731;
+}
+
 .contact-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -122,6 +172,12 @@
   display: inline-block;
 }
 
+:root.light-theme .social-btn {
+  border: 2px solid #1f2731;
+  color: #1f2731;
+  background: #fff;
+}
+
 .social-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -132,9 +188,21 @@
 }
 
 .social-btn.github:hover {
-  background: #e4d588;
+  background: #181717;
+  color: #fff;
+  border-color: #181717;
+}
+
+:root.light-theme .social-btn.github {
+  background: #fff;
   color: #1f2731;
-  border-color: #e4d588;
+  border-color: #1f2731;
+}
+
+:root.light-theme .social-btn.github:hover {
+  background: #181717;
+  color: #fff;
+  border-color: #181717;
 }
 
 .social-btn.linkedin {
@@ -143,6 +211,19 @@
 
 .social-btn.linkedin:hover {
   background: #0077b5;
+  color: #fff;
+  border-color: #0077b5;
+}
+
+:root.light-theme .social-btn.linkedin {
+  background: #fff;
+  color: #1f2731;
+  border-color: #1f2731;
+}
+
+:root.light-theme .social-btn.linkedin:hover {
+  background: #0077b5;
+  color: #fff;
   border-color: #0077b5;
 }
 
@@ -177,6 +258,10 @@
   font-size: 0.95rem;
 }
 
+:root.light-theme .form-group label {
+  color: #1f2731;
+}
+
 .form-group input,
 .form-group textarea {
   width: 100%;
@@ -191,9 +276,21 @@
   box-sizing: border-box;
 }
 
+:root.light-theme .form-group input,
+:root.light-theme .form-group textarea {
+  border: 2px solid #1f2731;
+  background: #fff;
+  color: #1f2731;
+}
+
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: rgba(255, 255, 255, 0.5);
+}
+
+:root.light-theme .form-group input::placeholder,
+:root.light-theme .form-group textarea::placeholder {
+  color: rgba(31, 39, 49, 0.6);
 }
 
 .form-group input:focus,
@@ -202,6 +299,13 @@
   border-color: #e4d588;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 0 3px rgba(228, 213, 136, 0.1);
+}
+
+:root.light-theme .form-group input:focus,
+:root.light-theme .form-group textarea:focus {
+  border-color: #1f2731;
+  background: #f9f4d0;
+  box-shadow: 0 0 0 3px rgba(31, 39, 49, 0.15);
 }
 
 .submit-btn {
@@ -215,6 +319,16 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+:root.light-theme .submit-btn {
+  background: linear-gradient(135deg, #1f2731 0%, #2c3a4f 100%);
+  color: #e4d588;
+  border: 2px solid #1f2731;
+}
+
+:root.light-theme .submit-btn:hover {
+  box-shadow: 0 8px 24px rgba(31, 39, 49, 0.25);
 }
 
 .submit-btn:hover {

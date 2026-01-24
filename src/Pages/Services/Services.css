@@ -5,6 +5,47 @@
   min-height: 100vh;
 }
 
+:root.light-theme .Services {
+  background: linear-gradient(135deg, #f4e9ae 0%, #e4d588 100%);
+  color: #1f2731;
+}
+
+:root.light-theme .Services .services-header h1 {
+  color: #1f2731;
+}
+
+:root.light-theme .Services .services-header .subtitle {
+  color: #2f3a4a;
+}
+
+:root.light-theme .Services .service-card h3 {
+  color: #1f2731;
+}
+
+:root.light-theme .Services .service-card p {
+  color: #1f2731;
+}
+
+:root.light-theme .service-card {
+  background: #fff;
+  border: 1px solid #1f2731;
+  box-shadow: 0 12px 28px rgba(31, 39, 49, 0.12);
+}
+
+:root.light-theme .service-card:hover {
+  background: #f4e9ae;
+  border-color: #1f2731;
+  box-shadow: 0 15px 36px rgba(31, 39, 49, 0.18);
+}
+
+:root.light-theme .service-icon {
+  color: #1f2731;
+}
+
+:root.light-theme .service-card:hover .service-icon {
+  color: #1f2731;
+}
+
 .services-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -98,6 +139,10 @@
   text-align: center;
 }
 
+:root.light-theme .process-section h2 {
+  color: #1f2731;
+}
+
 .process-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -116,10 +161,23 @@
   position: relative;
 }
 
+:root.light-theme .process-card {
+  background: #fff;
+  border: 1px solid #1f2731;
+  box-shadow: 0 12px 28px rgba(31, 39, 49, 0.12);
+  color: #1f2731;
+}
+
 .process-card:hover {
   background: rgba(255, 255, 255, 0.12);
   transform: translateY(-5px);
   border-color: #e4d588;
+}
+
+:root.light-theme .process-card:hover {
+  background: #f4e9ae;
+  border-color: #1f2731;
+  box-shadow: 0 15px 36px rgba(31, 39, 49, 0.18);
 }
 
 .process-number {
@@ -130,10 +188,19 @@
   line-height: 1;
 }
 
+:root.light-theme .process-number {
+  color: #1f2731;
+  opacity: 0.8;
+}
+
 .process-card h3 {
   font-size: 1.4rem;
   color: #b0c4ff;
   margin-bottom: 0.5rem;
+}
+
+:root.light-theme .process-card h3 {
+  color: #1f2731;
 }
 
 .process-card p {
@@ -141,6 +208,10 @@
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
+}
+
+:root.light-theme .process-card p {
+  color: #1f2731;
 }
 
 /* Animations */

@@ -13,6 +13,63 @@
   --nr-color: #e4d588;
   --liniar-gradient-color: #c2a662, #ad8849, #aa702e, #81742f;
   --box-shodow-color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Smooth theme transition animation */
+:root.theme-transitioning,
+:root.theme-transitioning * {
+  transition: background-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Light Theme - Professional & Readable */
+:root.light-theme {
+  --main-color: #e4d588;
+  --nr-color: #1f2731;
+  --text-color: #1f2731;
+  --box-shodow-color: rgba(0, 0, 0, 0.18);
+}
+
+:root.light-theme body {
+  background-color: #e4d588;
+  color: #1f2731;
+}
+
+:root.light-theme nav {
+  background: linear-gradient(135deg, #f1e6a8 0%, #e4d588 100%) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+:root.light-theme footer {
+  background: linear-gradient(135deg, #f1e6a8 0%, #e4d588 100%) !important;
+  color: #1f2731 !important;
+  border-top: 3px solid #667eea !important;
+}
+
+:root.light-theme .footer-copyright {
+  color: #1f2731 !important;
+}
+
+:root.light-theme .footer-link {
+  color: #1f2731 !important;
+}
+
+:root.light-theme .footer-link:hover {
+  color: #667eea !important;
+  background: rgba(102, 126, 234, 0.15) !important;
+}
+
+/* Dark Theme (Default) */
+:root.dark-theme,
+:root {
+  --main-color: #1f2731;
+  --nr-color: #e4d588;
+  --text-color: #ffffff;
+  --box-shodow-color: var(--text-color);
 }
 
 #root {

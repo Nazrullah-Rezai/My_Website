@@ -2,14 +2,16 @@ import React from "react";
 import "./Navbar.css";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 import nrLogo from "../../assets/images/nrLogo.png";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDark, toggleTheme } = useTheme();
 
   const navItems = [
     { id: 1, name: "Home", href: "/" },
@@ -35,12 +37,10 @@ const NavBar = () => {
   const handleNavClick = (e, href) => {
     setIsMenuOpen(false);
     
-    // Wenn es ein Hash-Link ist und wir auf der Startseite sind
     if (href.startsWith("#")) {
       if (location.pathname !== "/") {
         navigate("/");
       }
-      // SetTimeout für die Navigation
       setTimeout(() => {
         const id = href.slice(1);
         const element = document.getElementById(id);
@@ -97,23 +97,37 @@ const NavBar = () => {
             ))}
           </div>
 
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? (
-              <FiX className="menu-icon" size={24} />
-            ) : (
-              <FiMenu className="menu-icon" size={24} />
-            )}
-          </button>
+          <div className="navbar-actions">
+            <button
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Toggle dark/light theme"
+              title={isDark ? "Light Mode" : "Dark Mode"}
+            >
+              {isDark ? (
+                <FiSun className="theme-icon" size={20} />
+              ) : (
+                <FiMoon className="theme-icon" size={20} />
+              )}
+            </button>
+
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? (
+                <FiX className="menu-icon" size={24} />
+              ) : (
+                <FiMenu className="menu-icon" size={24} />
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </nav>
   );
 };
-
 
 export default NavBar;

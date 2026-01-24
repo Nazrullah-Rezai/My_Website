@@ -5,6 +5,19 @@
   min-height: 100vh;
 }
 
+:root.light-theme .Blog {
+  background: linear-gradient(135deg, #f4e9ae 0%, #e4d588 100%);
+  color: #1f2731;
+}
+
+:root.light-theme .Blog .blog-header h1 {
+  color: #1f2731;
+}
+
+:root.light-theme .Blog .blog-header .subtitle {
+  color: #2f3a4a;
+}
+
 .blog-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -47,11 +60,23 @@
   flex-direction: column;
 }
 
+:root.light-theme .project-card {
+  background: #fff;
+  border: 1px solid #1f2731;
+  box-shadow: 0 12px 28px rgba(31, 39, 49, 0.12);
+}
+
 .project-card:hover {
   background: rgba(255, 255, 255, 0.12);
   transform: translateY(-10px);
   border-color: #e4d588;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+:root.light-theme .project-card:hover {
+  background: #f4e9ae;
+  border-color: #1f2731;
+  box-shadow: 0 18px 46px rgba(31, 39, 49, 0.18);
 }
 
 /* Project Image */
@@ -87,6 +112,10 @@
   transition: opacity 0.3s ease;
 }
 
+:root.light-theme .project-overlay {
+  background: rgba(31, 39, 49, 0.75);
+}
+
 .project-card:hover .project-overlay {
   opacity: 1;
 }
@@ -104,6 +133,17 @@
   font-weight: 600;
 }
 
+:root.light-theme .project-link {
+  color: #1f2731;
+  border: 2px solid #1f2731;
+  background: #fff;
+}
+
+:root.light-theme .project-link:hover {
+  background: #1f2731;
+  color: #e4d588;
+}
+
 .project-link:hover {
   background: white;
   color: #1f2731;
@@ -118,12 +158,20 @@
   flex: 1;
 }
 
+:root.light-theme .project-content {
+  color: #1f2731;
+}
+
 .project-meta {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.85rem;
   color: #b0c4ff;
+}
+
+:root.light-theme .project-meta {
+  color: #30405a;
 }
 
 .project-date {
@@ -139,12 +187,20 @@
   line-height: 1.3;
 }
 
+:root.light-theme .project-card h3 {
+  color: #1f2731;
+}
+
 .project-card p {
   color: #d0d0d0;
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
   flex: 1;
+}
+
+:root.light-theme .project-card p {
+  color: #1f2731;
 }
 
 /* Tags */
@@ -164,6 +220,18 @@
   font-size: 0.8rem;
   border: 1px solid rgba(228, 213, 136, 0.3);
   transition: all 0.3s ease;
+}
+
+:root.light-theme .tag {
+  background: rgba(31, 39, 49, 0.08);
+  color: #1f2731;
+  border: 1px solid rgba(31, 39, 49, 0.3);
+}
+
+:root.light-theme .tag:hover {
+  background: rgba(31, 39, 49, 0.16);
+  border-color: #1f2731;
+  color: #1f2731;
 }
 
 .tag:hover {

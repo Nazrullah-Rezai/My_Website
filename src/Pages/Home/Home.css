@@ -8,6 +8,12 @@
   background-attachment: fixed;
   padding: 2rem;
   box-sizing: border-box;
+  color: white;
+}
+
+:root.light-theme .Home {
+  background: linear-gradient(135deg, #f4e9ae 0%, #e4d588 100%);
+  color: #1f2731;
 }
 
 /* Portfolio Main Container */
@@ -43,6 +49,10 @@
   gap: 1.5rem;
 }
 
+:root.light-theme .portfolio-text {
+  color: #1f2731;
+}
+
 .portfolio-header {
   margin-bottom: 1rem;
 }
@@ -57,6 +67,13 @@
   background-clip: text;
   animation: slideInLeft 0.8s ease-out;
   line-height: 1.2;
+}
+
+:root.light-theme .portfolio-title {
+  background: none;
+  color: #1f2731;
+  -webkit-text-fill-color: #1f2731;
+  font-weight: 700;
 }
 
 @keyframes slideInLeft {
@@ -77,12 +94,20 @@
   font-weight: 300;
 }
 
+:root.light-theme .portfolio-subtitle {
+  color: #30405a;
+}
+
 .portfolio-description {
   font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   line-height: 1.8;
   color: #e0e0e0;
   margin: 1rem 0;
   opacity: 0.9;
+}
+
+:root.light-theme .portfolio-description {
+  color: #2e3542;
 }
 
 /* CTA Buttons */
@@ -102,6 +127,12 @@
   border: 2px solid white;
 }
 
+:root.light-theme .btn-primary {
+  background: linear-gradient(135deg, #1f2731 0%, #2c3a4f 100%);
+  color: #e4d588;
+  border: 2px solid #1f2731;
+}
+
 .btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
@@ -111,6 +142,17 @@
   background: transparent;
   color: white;
   border: 2px solid white;
+}
+
+:root.light-theme .btn-secondary {
+  background: transparent;
+  color: #1f2731;
+  border: 2px solid #1f2731;
+}
+
+:root.light-theme .btn-secondary:hover {
+  background: #1f2731;
+  color: #e4d588;
 }
 
 .btn-secondary:hover {
@@ -140,6 +182,18 @@
   transition: all 0.3s ease;
   border: 2px solid rgba(255, 255, 255, 0.3);
   flex-shrink: 0;
+}
+
+:root.light-theme .social-link {
+  background: rgba(31, 39, 49, 0.08);
+  border: 2px solid rgba(31, 39, 49, 0.15);
+  color: #1f2731;
+}
+
+:root.light-theme .social-link:hover {
+  background: rgba(31, 39, 49, 0.12);
+  border-color: #1f2731;
+  box-shadow: 0 5px 15px rgba(31, 39, 49, 0.2);
 }
 
 .social-link:hover {
@@ -236,11 +290,29 @@
   min-height: 140px;
 }
 
+:root.light-theme .skill-card {
+  background: #fff;
+  border: 1px solid rgba(31, 39, 49, 0.2);
+  color: #1f2731;
+  box-shadow: 0 10px 25px rgba(31, 39, 49, 0.08);
+}
+
+:root.light-theme .skill-card * {
+  color: #1f2731 !important;
+  opacity: 1;
+}
+
 .skill-card:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-5px);
   border-color: rgba(255, 255, 255, 0.4);
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+:root.light-theme .skill-card:hover {
+  background: #f4e9ae;
+  border-color: rgba(31, 39, 49, 0.35);
+  box-shadow: 0 12px 32px rgba(31, 39, 49, 0.18);
 }
 
 .skill-icon {
@@ -249,10 +321,20 @@
   color: #b0c4ff;
 }
 
+:root.light-theme .skill-icon {
+  color: #1f2731;
+  opacity: 1;
+}
+
 .skill-card h3 {
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   margin: 0.5rem 0;
   font-weight: 600;
+}
+
+:root.light-theme .skill-card h3 {
+  color: #1f2731;
+  font-weight: 700;
 }
 
 .skill-card p {
@@ -260,6 +342,11 @@
   color: #d0d0d0;
   margin: 0;
   line-height: 1.4;
+}
+
+:root.light-theme .skill-card p {
+  color: #1f2731;
+  opacity: 0.95;
 }
 
 /* Responsive Design */

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./Home.css";
 import profileImage from "../../assets/images/portfoli-without-background.png";
 import Button from "../../components/Button";
@@ -25,23 +26,53 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="Portfolio">
-      <div className="portfolio-text">
-        <div className="portfolio-header">
+    <motion.div 
+      className="Portfolio"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <motion.div 
+        className="portfolio-text"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <motion.div 
+          className="portfolio-header"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <h1 className="portfolio-title">Nazrullah Rezai</h1>
           <p className="portfolio-subtitle">Full Stack Web Developer</p>
-        </div>
+        </motion.div>
         
-        <p className="portfolio-description">
+        <motion.p 
+          className="portfolio-description"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
           I'm a passionate web developer based in Darmstadt, Germany. I create modern, responsive web applications with a focus on user experience and clean code.
-        </p>
+        </motion.p>
 
-        <div className="portfolio-cta">
+        <motion.div 
+          className="portfolio-cta"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
           <Button className="BubbleButton btn-primary" onClick={handleViewWork}>View My Work</Button>
           <Button className="BubbleButton btn-secondary" onClick={handleContact}>Contact Me</Button>
-        </div>
+        </motion.div>
 
-        <div className="portfolio-socials">
+        <motion.div 
+          className="portfolio-socials"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
           <a href="https://github.com/Nazrullah-Rezai" target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
             <FaGithub />
           </a>
@@ -51,26 +82,42 @@ const Portfolio = () => {
           <a href="mailto:nasrollah.rzi@gmail.com" className="social-link" title="Email">
             <FaEnvelope />
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="portfolio-myImage">
-        <div className="image-container">
+      <motion.div 
+        className="portfolio-myImage"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <motion.div 
+          className="image-container"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <img src={profileImage} alt="Nazrullah Rezai" />
           <div className="image-glow"></div>
-        </div>
+        </motion.div>
 
         <div className="skills-container">
           {skills.map((skill, index) => (
-            <div key={index} className="skill-card">
+            <motion.div 
+              key={index} 
+              className="skill-card"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 + index * 0.15 }}
+              whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.3)" }}
+            >
               <div className="skill-icon">{skill.icon}</div>
               <h3>{skill.title}</h3>
               <p>{skill.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

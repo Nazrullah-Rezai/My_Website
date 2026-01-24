@@ -5,6 +5,64 @@
   min-height: 100vh;
 }
 
+:root.light-theme .About {
+  background: linear-gradient(135deg, #f4e9ae 0%, #e4d588 100%);
+  color: #1f2731;
+}
+
+:root.light-theme .About .about-header h1 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .about-header .subtitle {
+  color: #2f3a4a;
+}
+
+:root.light-theme .About .intro-text h2 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .intro-text p {
+  color: #1f2731;
+  opacity: 1;
+}
+
+:root.light-theme .About .about-intro {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(31, 39, 49, 0.2);
+  box-shadow: 0 10px 30px rgba(31, 39, 49, 0.1);
+}
+
+:root.light-theme .About .skills-section h2,
+:root.light-theme .About .timeline-section h2,
+:root.light-theme .About .values-section h2 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .skill-group {
+  background: #fff;
+  border: 1px solid #1f2731;
+  box-shadow: 0 10px 25px rgba(31, 39, 49, 0.12);
+}
+
+:root.light-theme .About .skill-group:hover {
+  background: #e4d588;
+  border-color: #1f2731;
+  box-shadow: 0 12px 30px rgba(31, 39, 49, 0.18);
+}
+
+:root.light-theme .About .skill-group h3 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .skill-group li {
+  color: #1f2731;
+}
+
+:root.light-theme .About .skill-group li::before {
+  color: #1f2731;
+}
+
 .about-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -50,10 +108,51 @@
 }
 
 .intro-text p {
-  font-size: 1.1rem;
+  color: #e0e0e0;
   line-height: 1.8;
-  color: #d0d0d0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+/* CV Download Button */
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.cv-download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.cv-download-btn:active {
+  transform: translateY(-1px);
+}
+
+:root.light-theme .cv-download-btn {
+  background: linear-gradient(135deg, #1f2731 0%, #2c3a4f 100%);
+  color: #e4d588;
+  box-shadow: 0 4px 15px rgba(31, 39, 49, 0.3);
+  border: 2px solid #1f2731;
+}
+
+:root.light-theme .cv-download-btn:hover {
+  box-shadow: 0 8px 25px rgba(31, 39, 49, 0.5);
+  background: linear-gradient(135deg, #2c3a4f 0%, #1f2731 100%);
 }
 
 .intro-icon {
@@ -62,6 +161,10 @@
   align-items: center;
   color: #667eea;
   animation: float 3s ease-in-out infinite;
+}
+
+:root.light-theme .intro-icon {
+  color: #1f2731;
 }
 
 @keyframes float {
@@ -191,6 +294,37 @@
   border-left: 4px solid #e4d588;
 }
 
+:root.light-theme .About .timeline {
+  color: #1f2731;
+}
+
+:root.light-theme .About .timeline-dot {
+  background: #1f2731;
+  border: 3px solid #1f2731;
+}
+
+:root.light-theme .About .timeline-line {
+  background: linear-gradient(180deg, #1f2731 0%, transparent 100%);
+}
+
+:root.light-theme .About .timeline-content {
+  background: #fff;
+  border-left: 4px solid #1f2731;
+  box-shadow: 0 12px 30px rgba(31, 39, 49, 0.12);
+}
+
+:root.light-theme .About .timeline-content h3 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .timeline-content h4 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .timeline-content p {
+  color: #1f2731;
+}
+
 .timeline-content h3 {
   color: #e4d588;
   font-size: 1.3rem;
@@ -240,6 +374,13 @@
   gap: 1rem;
 }
 
+:root.light-theme .About .value-card {
+  background: #fff;
+  border: 1px solid #1f2731;
+  box-shadow: 0 12px 30px rgba(31, 39, 49, 0.12);
+  color: #1f2731;
+}
+
 .value-card:hover {
   background: rgba(255, 255, 255, 0.12);
   transform: translateY(-10px);
@@ -247,9 +388,24 @@
   color: #e4d588;
 }
 
+:root.light-theme .About .value-card:hover {
+  background: #e4d588;
+  border-color: #1f2731;
+  color: #1f2731;
+  box-shadow: 0 14px 34px rgba(31, 39, 49, 0.16);
+}
+
 .value-card svg {
   color: #b0c4ff;
   transition: color 0.3s ease;
+}
+
+:root.light-theme .About .value-card svg {
+  color: #1f2731;
+}
+
+:root.light-theme .About .value-card:hover svg {
+  color: #1f2731;
 }
 
 .value-card:hover svg {
@@ -262,6 +418,14 @@
   transition: color 0.3s ease;
 }
 
+:root.light-theme .About .value-card h3 {
+  color: #1f2731;
+}
+
+:root.light-theme .About .value-card:hover h3 {
+  color: #1f2731;
+}
+
 .value-card:hover h3 {
   color: #e4d588;
 }
@@ -270,6 +434,15 @@
   color: #d0d0d0;
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+:root.light-theme .About .value-card p {
+  color: #1f2731;
+  opacity: 1;
+}
+
+:root.light-theme .About .value-card:hover p {
+  color: #1f2731;
 }
 
 /* Animations */
@@ -353,5 +526,9 @@
 
   .timeline-content {
     padding: 1rem;
+
+  :root.light-theme .About .value-card p {
+    color: #1f2731;
+  }
   }
 }

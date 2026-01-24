@@ -1,9 +1,9 @@
 import React from "react";
 import "./About.css";
-import { FaCode, FaGraduationCap, FaBriefcase, FaHeart } from "react-icons/fa";
-
+import { FaCode, FaGraduationCap, FaBriefcase, FaHeart, FaDownload } from "react-icons/fa";
+import { downloadCVSimple } from "../../utils/cvGenerator";
 const About = () => {
-  const skills = [
+const skills = [
     { category: "Frontend", items: ["React", "JavaScript", "HTML/CSS", "TypeScript", "Tailwind CSS"] },
     { category: "Backend", items: ["Node.js", "Express", "MongoDB", "Firebase", "REST APIs"] },
     { category: "Tools", items: ["Git", "VS Code", "npm/yarn", "webpack", "Docker"] },
@@ -51,6 +51,9 @@ const About = () => {
             <p>
               Based in Darmstadt, Germany, I work with both startups and established companies to build web applications that users love. My approach combines clean code, modern design principles, and attention to user experience.
             </p>
+            <button className="cv-download-btn" onClick={downloadCVSimple}>
+              <FaDownload /> Download My CV
+            </button>
           </div>
           <div className="intro-icon">
             <FaCode size={80} />
@@ -123,6 +126,6 @@ const About = () => {
       </div>
     </section>
   );
-};
+}
 
 export default About;
