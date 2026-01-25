@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
+import logo from "../../assets/images/nrLogo.png";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -63,7 +64,7 @@ const NavBar = () => {
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <div className="navbar-inner">
           <a href="#home" className="navbar-logo" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
-            <div className="logo-icon">N</div>
+            <img src={logo} alt="NR Logo" className="logo-icon" />
             <span className="logo-text">Naz.dev</span>
           </a>
 
