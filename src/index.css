@@ -19,17 +19,17 @@
   --text-secondary: #8b949e;
   --text-muted: #6e7681;
 
-  /* Accent colors - Green/Emerald theme */
-  --accent-primary: #10b981;
-  --accent-secondary: #059669;
-  --accent-tertiary: #34d399;
-  --accent-light: #6ee7b7;
-  --accent-dark: #047857;
+  /* Accent colors - Modern Red/Rose theme */
+  --accent-primary: #f43f5e;
+  --accent-secondary: #e11d48;
+  --accent-tertiary: #fb7185;
+  --accent-light: #fda4af;
+  --accent-dark: #be123c;
 
-  /* Gradients - Green/Emerald only */
-  --gradient-primary: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  /* Gradients - Modern Red only */
+  --gradient-primary: linear-gradient(135deg, #e11d48 0%, #f43f5e 50%, #fb7185 100%);
   --gradient-secondary: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-  --gradient-glow: linear-gradient(135deg, rgba(5, 150, 105, 0.4) 0%, rgba(16, 185, 129, 0.3) 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(225, 29, 72, 0.4) 0%, rgba(244, 63, 94, 0.3) 100%);
 
   /* Spacing */
   --section-padding: clamp(4rem, 10vw, 8rem);
@@ -37,7 +37,7 @@
 
   /* Effects */
   --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
-  --shadow-glow: 0 0 60px rgba(16, 185, 129, 0.15);
+  --shadow-glow: 0 0 60px rgba(244, 63, 94, 0.15);
 
   /* Sidebar */
   --sidebar-width: 280px;
@@ -149,7 +149,7 @@ button {
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.1) 0%, transparent 70%);
   filter: blur(60px);
   animation: float-slow 20s ease-in-out infinite;
 }
@@ -159,7 +159,7 @@ button {
   left: -10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(5, 150, 105, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.1) 0%, transparent 70%);
   filter: blur(60px);
   animation: float-slow 25s ease-in-out infinite reverse;
 }
@@ -169,7 +169,7 @@ button {
   left: 50%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.08) 0%, transparent 70%);
   filter: blur(80px);
   animation: float-slow 15s ease-in-out infinite;
 }

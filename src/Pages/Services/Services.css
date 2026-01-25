@@ -61,7 +61,7 @@
 
 .service-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(244, 63, 94, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -137,7 +137,7 @@
 
 .process-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(244, 63, 94, 0.3);
 }
 
 .process-number {
@@ -181,27 +181,83 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .Services {
+    padding: var(--section-padding) 2rem;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .Services {
-    padding: 4rem 1.5rem;
+    padding: 3rem 1.25rem;
+  }
+
+  .services-header {
+    margin-bottom: 2.5rem;
   }
 
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .service-card {
+    padding: 1.5rem;
+  }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
+  }
+
+  .service-icon svg {
+    font-size: 1.5rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .process-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
-  .service-card {
-    padding: 2rem;
+  .process-card {
+    padding: 1.25rem;
+  }
+
+  .process-number {
+    font-size: 2rem;
+  }
+
+  .process-card h3 {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .Services {
+    padding: 2.5rem 1rem;
+  }
+
   .services-header h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  .services-header .subtitle {
+    font-size: 0.95rem;
   }
 
   .process-grid {

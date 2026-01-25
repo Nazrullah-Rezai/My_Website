@@ -166,7 +166,7 @@
 }
 
 .nav-item:hover {
-  background: rgba(16, 185, 129, 0.08);
+  background: rgba(244, 63, 94, 0.08);
   color: var(--text-primary);
 }
 
@@ -175,7 +175,7 @@
 }
 
 .nav-item.active {
-  background: rgba(16, 185, 129, 0.12);
+  background: rgba(244, 63, 94, 0.12);
   color: var(--accent-primary);
 }
 
@@ -235,7 +235,7 @@
 
 .sidebar-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 10px 30px rgba(244, 63, 94, 0.3);
 }
 
 .sidebar-cta .cta-icon {

@@ -98,7 +98,7 @@
 
 .skill-group:hover {
   transform: translateY(-5px);
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(244, 63, 94, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
@@ -215,7 +215,7 @@
 }
 
 .timeline-content:hover {
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(244, 63, 94, 0.3);
   transform: translateX(5px);
 }
 
@@ -268,7 +268,7 @@
 
 .value-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(244, 63, 94, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
@@ -292,6 +292,12 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .About {
+    padding: var(--section-padding) 2rem;
+  }
+}
+
 @media (max-width: 992px) {
   .about-intro {
     grid-template-columns: 1fr;
@@ -302,15 +308,54 @@
   .intro-icon {
     order: -1;
   }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .About {
-    padding: 4rem 1.5rem;
+    padding: 3rem 1.25rem;
+  }
+
+  .about-header {
+    margin-bottom: 2.5rem;
   }
 
   .about-intro {
-    padding: 2rem;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .intro-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .intro-text p {
+    font-size: 1rem;
+  }
+
+  .skills-section,
+  .timeline-section,
+  .values-section {
+    margin-bottom: 3rem;
+  }
+
+  .skills-section h2,
+  .timeline-section h2,
+  .values-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skill-group {
+    padding: 1.5rem;
   }
 
   .timeline-item {
@@ -320,15 +365,56 @@
   .timeline-content {
     padding: 1rem;
   }
+
+  .timeline-content h4 {
+    font-size: 1.1rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .value-card {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .about-header h1 {
-    font-size: 2rem;
+  .About {
+    padding: 2.5rem 1rem;
   }
 
-  .skills-grid,
-  .values-grid {
-    grid-template-columns: 1fr;
+  .about-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .about-header .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .about-intro {
+    padding: 1.25rem;
+  }
+
+  .intro-text h2 {
+    font-size: 1.25rem;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .timeline-content h3 {
+    font-size: 0.75rem;
+  }
+
+  .timeline-content h4 {
+    font-size: 1rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.875rem;
   }
 }
