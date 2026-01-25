@@ -1,132 +1,114 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useTheme } from "../../context/ThemeContext";
-import nrLogo from "../../assets/images/nrLogo.png";
-import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { isDark, toggleTheme } = useTheme();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { id: 1, name: "Home", href: "/" },
-    { id: 2, name: "About", href: "#about" },
-    { id: 3, name: "Services", href: "#services" },
-    { id: 4, name: "Portfolio", href: "#portfolio" },
-    { id: 5, name: "Blog", href: "#blog" },
-    { id: 6, name: "Contact", href: "#contact" },
-    { id: 7, name: "Imprint", href: "/imprint" },
-    { id: 8, name: "Privacy", href: "/privacy" },
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "services", label: "Services" },
+    { id: "blog", label: "Projects" },
   ];
 
   useEffect(() => {
+    const sections = ["home", "about", "services", "blog", "contact"];
+
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 50);
+
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (e, href) => {
-    setIsMenuOpen(false);
-    
-    if (href.startsWith("#")) {
-      if (location.pathname !== "/") {
-        navigate("/");
-      }
-      setTimeout(() => {
-        const id = href.slice(1);
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-      e.preventDefault();
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setMobileMenuOpen(false);
     }
   };
 
   return (
-    <nav
-      className={`Navbar${scrolled ? " scrolled" : ""}`}
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="Navbar-container">
-        <div className="Navbar-flex">
-          <div className="Logo-wrapper">
-            <img
-              src={nrLogo}
-              alt="Logo"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/32";
-              }}
-            />
-          </div>
+    <>
+      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+        <div className="navbar-inner">
+          <a href="#home" className="navbar-logo" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
+            <div className="logo-icon">N</div>
+            <span className="logo-text">Naz.dev</span>
+          </a>
 
-          <div className={`Nav-items ${isMenuOpen ? "mobile-open" : ""}`}>
+          <div className="nav-items">
             {navItems.map((item) => (
-              item.href.startsWith("/") ? (
-                <Link
-                  key={item.id}
-                  to={item.href}
-                  className="Nav-btn"
-                  onClick={handleNavClick}
-                >
-                  {item.name}
-                  <span className="underline" />
-                </Link>
-              ) : (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  className="Nav-btn"
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.name}
-                  <span className="underline" />
-                </a>
-              )
+              <button
+                key={item.id}
+                className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+                onClick={() => scrollToSection(item.id)}
+              >
+                <span>{item.label}</span>
+              </button>
             ))}
           </div>
 
-          <div className="navbar-actions">
-            <button
-              className="theme-toggle-btn"
-              onClick={toggleTheme}
-              aria-label="Toggle dark/light theme"
-              title={isDark ? "Light Mode" : "Dark Mode"}
-            >
-              {isDark ? (
-                <FiSun className="theme-icon" size={20} />
-              ) : (
-                <FiMoon className="theme-icon" size={20} />
-              )}
-            </button>
+          <button className="nav-cta" onClick={() => scrollToSection('contact')}>
+            Let's Talk
+          </button>
 
-            <button
-              className="mobile-menu-btn"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle navigation menu"
-              aria-expanded={isMenuOpen}
-            >
-              {isMenuOpen ? (
-                <FiX className="menu-icon" size={24} />
-              ) : (
-                <FiMenu className="menu-icon" size={24} />
-              )}
-            </button>
-          </div>
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+          </button>
         </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+            onClick={() => scrollToSection(item.id)}
+          >
+            <span>{item.label}</span>
+          </button>
+        ))}
+        <button className="nav-cta" onClick={() => scrollToSection('contact')}>
+          Let's Talk
+        </button>
       </div>
-    </nav>
+    </>
   );
 };
 

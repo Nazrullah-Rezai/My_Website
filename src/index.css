@@ -1,248 +1,185 @@
+/* ===== ULTRA MODERN GLOBAL STYLES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --font-family: "Arial", sans-serif;
-  --font-size: 16px;
-  --line-height: 1.5;
-  --text-color: #ffffff;
-  --btn-color: #c2a662;
-  --btn-color: #0b0d25;
-  --main-color: #1f2731;
-  --nr-color: #e4d588;
-  --liniar-gradient-color: #c2a662, #ad8849, #aa702e, #81742f;
-  --box-shodow-color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
-/* Smooth theme transition animation */
-:root.theme-transitioning,
-:root.theme-transitioning * {
-  transition: background-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-}
-
-/* Light Theme - Professional & Readable */
-:root.light-theme {
-  --main-color: #e4d588;
-  --nr-color: #1f2731;
-  --text-color: #1f2731;
-  --box-shodow-color: rgba(0, 0, 0, 0.18);
-}
-
-:root.light-theme body {
-  background-color: #e4d588;
-  color: #1f2731;
-}
-
-:root.light-theme nav {
-  background: linear-gradient(135deg, #f1e6a8 0%, #e4d588 100%) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
-}
-
-:root.light-theme footer {
-  background: linear-gradient(135deg, #f1e6a8 0%, #e4d588 100%) !important;
-  color: #1f2731 !important;
-  border-top: 3px solid #667eea !important;
-}
-
-:root.light-theme .footer-copyright {
-  color: #1f2731 !important;
-}
-
-:root.light-theme .footer-link {
-  color: #1f2731 !important;
-}
-
-:root.light-theme .footer-link:hover {
-  color: #667eea !important;
-  background: rgba(102, 126, 234, 0.15) !important;
-}
-
-/* Dark Theme (Default) */
-:root.dark-theme,
 :root {
-  --main-color: #1f2731;
-  --nr-color: #e4d588;
-  --text-color: #ffffff;
-  --box-shodow-color: var(--text-color);
+  /* Colors - Modern Red/Rose Theme */
+  --bg-primary: #030303;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #111111;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
+  --accent-primary: #f43f5e;
+  --accent-secondary: #e11d48;
+  --accent-tertiary: #fb7185;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #e11d48 0%, #f43f5e 50%, #fb7185 100%);
+  --gradient-glow: radial-gradient(circle, rgba(244, 63, 94, 0.15) 0%, transparent 70%);
+
+  /* Sizing */
+  --container-width: 1200px;
+  --section-padding: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto auto;
-  grid-template-areas:
-    "navbar navbar"
-    "main main"
-    "footer footer";
-}
-
-body {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  line-height: var(--line-height);
-  background-color: var(--main-color);
-  color: var(--nr-color);
-  overflow-x: hidden;
-}
-
-nav {
-  grid-area: navbar;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-  grid-area: main;
-  padding: 1em;
+  flex: 1;
 }
 
-aside {
-  height: calc(100vh - 80px);
-  align-self: start;
-  top: 80px;
-  background-color: gray;
-  display: block;
+/* Selection */
+::selection {
+  background: rgba(244, 63, 94, 0.3);
+  color: var(--text-primary);
 }
 
-footer {
-  grid-area: footer;
-  background-color: orange;
-  padding: 2em;
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-base);
 }
 
-@media (max-width: 768px) {
-  #root {
-    grid-template-columns: 1fr;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(244, 63, 94, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(244, 63, 94, 0.5);
+}
+
+/* Animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-
-  aside {
-    position: fixed;
-    right: 0;
-    width: 90%;
-    background-color: rgba(7, 6, 6, 0.753);
-    transform: translateX(100%);
-    transition: transform 700ms ease-in-out;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .showSidebar .navbar {
-   
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
     transform: translateX(0);
-    position: fixed;
-    right: 0;
-    width: 90%;
-    background-color: rgba(7, 6, 6, 0.753);
-    transform: translateX(100%);
-    transition: transform 700ms ease-in-out;
   }
 }
 
-.BubbleButton {
-  background-image: linear-gradient(var(--liniar-gradient-color));
-  margin-left: 50%;
-  position: relative;
-  height: 40px;
-  width: 200px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  color: var(--nr-color);
-  font-weight: bold;
-  cursor: pointer;
-  text-shadow: 0 0 5px #343a40;
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.BubbleButton:active {
-  transform: scale(0.98);
+/* Utility Classes */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.BubbleButton::before,
-.BubbleButton::after {
-  content: "";
+/* Section Divider */
+section::before {
+  content: '';
   position: absolute;
-  height: 100%;
-  width: 150%;
-  border: none;
-  left: 50%;
-  transform: translateX(-50%);
-  background-repeat: no-repeat;
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.3), transparent);
 }
 
-.BubbleButton.buttonAnimation::before {
-  top: -70%;
-  background-image: radial-gradient(circle, #fbff13 25%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 20%, transparent 25%),
-    radial-gradient(circle, #fbff13 30%, transparent 20%),
-    radial-gradient(circle, transparent 20%, #fbff13 20%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 10%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 10%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 10%, transparent 25%);
-
-  background-size: 10% 20%, 15% 30%, 10% 35%, 20% 35%, 10% 35%, 10% 30%, 5% 20%,
-    10% 25%, 5% 20%, 10% 35%, 22% 50%;
-  background-position: 10% 90%, 15% 80%, 22% 70%, 25% 60%, 33% 85%, 40% 75%,
-    20% 50%, 12% 70%, 37% 35%, 45% 70%, 48% 60%;
-  animation: topbubbles 1s linear forwards;
-}
-.BubbleButton.buttonAnimation::after {
-  bottom: -70%;
-  background-image: radial-gradient(circle, #fbff13 25%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 20%, transparent 25%),
-    radial-gradient(circle, #fbff13 30%, transparent 20%),
-    radial-gradient(circle, transparent 20%, #fbff13 20%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 10%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 10%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, #fbff13 35%, transparent 25%),
-    radial-gradient(circle, transparent 20%, #fbff13 10%, transparent 25%);
-  background-size: 10% 20%, 15% 30%, 10% 35%, 20% 35%, 10% 35%, 10% 30%, 5% 20%,
-    10% 25%, 5% 20%, 10% 35%, 22% 50%;
-  background-position: 45% 20%, 80% 20%, 53% 30%, 58% 12%, 62% 40%, 65% 5%,
-    70% 35%, 68% 25%, 42% 40%, 88% 5%, 48% 25%;
-  animation: bottombubbles 1s linear forwards;
-}
-
-@keyframes topbubbles {
-  50% {
-    background-position: 2% 70%, 0% 20%, 10% 50%, 20% 0%, 20% 20%, 20% 40%,
-      50% 20%, 30% 20%, 60% 30%, 40% 50%, 50% 40%;
-  }
-  100% {
-    background-position: 0% 50%, 0% 10%, 10% 30%, 20% -10%, 10% 5%, 20% 20%,
-      40% 10%, 30% 10%, 60% 15%, 40% 20%, 50% 20%;
-    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%,
-      0% 0%, 0% 0%, 0% 0%;
+/* Responsive Base */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 4rem;
   }
 }
 
-@keyframes bottombubbles {
-  50% {
-    background-position: 80% 70%, 20% 75%, 40% 50%, 60% 60%, 65% 55%, 70% 70%,
-      80% 75%, 90% 60%, 80% 50%, 60% 80%, 90% 40%;
+@media (max-width: 480px) {
+  :root {
+    --section-padding: 3rem;
   }
-  100% {
-    background-position: 80% 85%, 20% 90%, 50% 50%, 60% 90%, 50% 95%, 70% 70%,
-      90% 100%, 90% 80%, 80% 70%, 70% 85%, 90% 90%;
-    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%,
-      0% 0%, 0% 0%, 0% 0%;
-  }
-}
 
-/* dark mode  based on System Preferences */
-@media (prefers-color-scheme: dark) {
-  * {
-    --main-color: #1f2731;
-    --btn-color: #f2f0ef;
-    --nav-color: #1f2021;
+  body {
+    font-size: 15px;
   }
 }
