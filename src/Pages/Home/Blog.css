@@ -50,7 +50,7 @@
 
 .project-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(88, 166, 255, 0.3);
+  border-color: rgba(16, 185, 129, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -110,7 +110,7 @@
 }
 
 .project-link:hover {
-  box-shadow: 0 8px 25px rgba(88, 166, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
 .project-link svg {
@@ -162,7 +162,7 @@
 
 .tag {
   padding: 0.25rem 0.75rem;
-  background: rgba(88, 166, 255, 0.1);
+  background: rgba(16, 185, 129, 0.1);
   color: var(--accent-primary);
   font-size: 0.75rem;
   font-weight: 500;
@@ -171,7 +171,7 @@
 }
 
 .tag:hover {
-  background: rgba(88, 166, 255, 0.2);
+  background: rgba(16, 185, 129, 0.2);
 }
 
 /* Responsive */

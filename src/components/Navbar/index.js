@@ -1,117 +1,132 @@
 import React, { useState, useEffect } from "react";
+import { FiHome, FiUser, FiBriefcase, FiFolder, FiMail, FiChevronLeft, FiMenu, FiX, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import "./Navbar.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FiMenu, FiX } from "react-icons/fi";
 
-const NavBar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { id: 1, name: "Home", href: "/" },
-    { id: 2, name: "About", href: "#about" },
-    { id: 3, name: "Services", href: "#services" },
-    { id: 4, name: "Portfolio", href: "#portfolio" },
-    { id: 5, name: "Contact", href: "#contact", cta: true },
+    { id: "home", label: "Home", icon: FiHome },
+    { id: "about", label: "About", icon: FiUser },
+    { id: "services", label: "Services", icon: FiBriefcase },
+    { id: "blog", label: "Projects", icon: FiFolder },
+    { id: "contact", label: "Contact", icon: FiMail },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
+      const sections = navItems.map(item => item.id);
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when clicking outside or on escape
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape") setIsMenuOpen(false);
-    };
-
-    if (isMenuOpen) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
-
-  const handleNavClick = (e, href) => {
-    setIsMenuOpen(false);
-
-    if (href.startsWith("#")) {
-      if (location.pathname !== "/") {
-        navigate("/");
-      }
-      setTimeout(() => {
-        const id = href.slice(1);
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-      e.preventDefault();
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMobileOpen(false);
     }
   };
 
-  return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-      <div className="navbar-inner">
-        <a href="#home" className="navbar-logo" onClick={(e) => handleNavClick(e, "#home")}>
-          Nazrullah Rezai
-        </a>
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
-        <div className={`Nav-items ${isMenuOpen ? "mobile-open" : ""}`}>
-          {navItems.map((item) => (
-            item.href.startsWith("/") ? (
-              <Link
-                key={item.id}
-                to={item.href}
-                className={`Nav-btn ${item.cta ? "cta" : ""}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-                {!item.cta && <span className="underline" />}
-              </Link>
-            ) : (
-              <a
-                key={item.id}
-                href={item.href}
-                className={`Nav-btn ${item.cta ? "cta" : ""}`}
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.name}
-                {!item.cta && <span className="underline" />}
-              </a>
-            )
-          ))}
+  const toggleMobile = () => {
+    setIsMobileOpen(!isMobileOpen);
+  };
+
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      <button className="mobile-menu-btn" onClick={toggleMobile}>
+        {isMobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+      </button>
+
+      {/* Overlay for mobile */}
+      <div
+        className={`sidebar-overlay ${isMobileOpen ? 'visible' : ''}`}
+        onClick={() => setIsMobileOpen(false)}
+      />
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
+        {/* Header */}
+        <div className="sidebar-header">
+          <a href="#home" className="sidebar-logo" onClick={() => scrollToSection('home')}>
+            <div className="logo-icon">N</div>
+            <span className="logo-text">Naz.dev</span>
+          </a>
+          <button className="sidebar-toggle" onClick={toggleCollapse}>
+            <FiChevronLeft size={18} />
+          </button>
         </div>
 
-        <button
-          className="mobile-menu-btn"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle navigation menu"
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? (
-            <FiX className="menu-icon" size={24} />
-          ) : (
-            <FiMenu className="menu-icon" size={24} />
-          )}
-        </button>
-      </div>
-    </nav>
+        {/* Navigation */}
+        <nav className="sidebar-nav">
+          <div className="nav-section">
+            <div className="nav-section-title">Navigation</div>
+            <div className="nav-items">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
+                  onClick={() => scrollToSection(item.id)}
+                  data-tooltip={item.label}
+                >
+                  <span className="nav-icon">
+                    <item.icon />
+                  </span>
+                  <span className="nav-label">{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </nav>
+
+        {/* Footer */}
+        <div className="sidebar-footer">
+          <button
+            className="sidebar-cta"
+            onClick={() => scrollToSection('contact')}
+          >
+            <FiMail className="cta-icon" />
+            <span className="cta-text">Get in Touch</span>
+          </button>
+
+          <div className="sidebar-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
+              <FiGithub size={16} />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
+              <FiLinkedin size={16} />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
+              <FiTwitter size={16} />
+            </a>
+          </div>
+        </div>
+      </aside>
+    </>
   );
 };
 
-export default NavBar;
+export default Sidebar;
