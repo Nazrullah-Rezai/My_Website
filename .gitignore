@@ -8,8 +8,6 @@
 # testing
 /coverage
 # data
-*.png
-*.jpg
 # production
 /build
 

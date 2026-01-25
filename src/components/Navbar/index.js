@@ -1,132 +1,133 @@
-import React, { useState, useEffect } from "react";
-import { FiHome, FiUser, FiBriefcase, FiFolder, FiMail, FiChevronLeft, FiMenu, FiX, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import React from "react";
 import "./Navbar.css";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
+import nrLogo from "../../assets/images/nrLogo.png";
+import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+const NavBar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isDark, toggleTheme } = useTheme();
 
   const navItems = [
-    { id: "home", label: "Home", icon: FiHome },
-    { id: "about", label: "About", icon: FiUser },
-    { id: "services", label: "Services", icon: FiBriefcase },
-    { id: "blog", label: "Projects", icon: FiFolder },
-    { id: "contact", label: "Contact", icon: FiMail },
+    { id: 1, name: "Home", href: "/" },
+    { id: 2, name: "About", href: "#about" },
+    { id: 3, name: "Services", href: "#services" },
+    { id: 4, name: "Portfolio", href: "#portfolio" },
+    { id: 5, name: "Blog", href: "#blog" },
+    { id: 6, name: "Contact", href: "#contact" },
+    { id: 7, name: "Imprint", href: "/imprint" },
+    { id: 8, name: "Privacy", href: "/privacy" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => item.id);
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileOpen(false);
+  const handleNavClick = (e, href) => {
+    setIsMenuOpen(false);
+    
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate("/");
+      }
+      setTimeout(() => {
+        const id = href.slice(1);
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      e.preventDefault();
     }
   };
 
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
-  const toggleMobile = () => {
-    setIsMobileOpen(!isMobileOpen);
-  };
-
   return (
-    <>
-      {/* Mobile Menu Button */}
-      <button className="mobile-menu-btn" onClick={toggleMobile}>
-        {isMobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-      </button>
+    <nav
+      className={`Navbar${scrolled ? " scrolled" : ""}`}
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <div className="Navbar-container">
+        <div className="Navbar-flex">
+          <div className="Logo-wrapper">
+            <img
+              src={nrLogo}
+              alt="Logo"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://via.placeholder.com/32";
+              }}
+            />
+          </div>
 
-      {/* Overlay for mobile */}
-      <div
-        className={`sidebar-overlay ${isMobileOpen ? 'visible' : ''}`}
-        onClick={() => setIsMobileOpen(false)}
-      />
-
-      {/* Sidebar */}
-      <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
-        {/* Header */}
-        <div className="sidebar-header">
-          <a href="#home" className="sidebar-logo" onClick={() => scrollToSection('home')}>
-            <div className="logo-icon">N</div>
-            <span className="logo-text">Naz.dev</span>
-          </a>
-          <button className="sidebar-toggle" onClick={toggleCollapse}>
-            <FiChevronLeft size={18} />
-          </button>
-        </div>
-
-        {/* Navigation */}
-        <nav className="sidebar-nav">
-          <div className="nav-section">
-            <div className="nav-section-title">Navigation</div>
-            <div className="nav-items">
-              {navItems.map((item) => (
-                <button
+          <div className={`Nav-items ${isMenuOpen ? "mobile-open" : ""}`}>
+            {navItems.map((item) => (
+              item.href.startsWith("/") ? (
+                <Link
                   key={item.id}
-                  className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
-                  onClick={() => scrollToSection(item.id)}
-                  data-tooltip={item.label}
+                  to={item.href}
+                  className="Nav-btn"
+                  onClick={handleNavClick}
                 >
-                  <span className="nav-icon">
-                    <item.icon />
-                  </span>
-                  <span className="nav-label">{item.label}</span>
-                </button>
-              ))}
-            </div>
+                  {item.name}
+                  <span className="underline" />
+                </Link>
+              ) : (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  className="Nav-btn"
+                  onClick={(e) => handleNavClick(e, item.href)}
+                >
+                  {item.name}
+                  <span className="underline" />
+                </a>
+              )
+            ))}
           </div>
-        </nav>
 
-        {/* Footer */}
-        <div className="sidebar-footer">
-          <button
-            className="sidebar-cta"
-            onClick={() => scrollToSection('contact')}
-          >
-            <FiMail className="cta-icon" />
-            <span className="cta-text">Get in Touch</span>
-          </button>
+          <div className="navbar-actions">
+            <button
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Toggle dark/light theme"
+              title={isDark ? "Light Mode" : "Dark Mode"}
+            >
+              {isDark ? (
+                <FiSun className="theme-icon" size={20} />
+              ) : (
+                <FiMoon className="theme-icon" size={20} />
+              )}
+            </button>
 
-          <div className="sidebar-socials">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
-              <FiGithub size={16} />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
-              <FiLinkedin size={16} />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
-              <FiTwitter size={16} />
-            </a>
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? (
+                <FiX className="menu-icon" size={24} />
+              ) : (
+                <FiMenu className="menu-icon" size={24} />
+              )}
+            </button>
           </div>
         </div>
-      </aside>
-    </>
+      </div>
+    </nav>
   );
 };
 
-export default Sidebar;
+export default NavBar;
