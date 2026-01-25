@@ -1,55 +1,41 @@
 import React from "react";
+import { FiArrowRight } from "react-icons/fi";
 import "./Home.css";
 
 const Home = () => {
-  return (
-    <>
-      <section className="hero" id="home">
-        <p className="hero-label">Web Developer & Designer</p>
-        <h1 className="hero-title">
-          Building <span className="gradient">digital experiences</span> that inspire.
-        </h1>
-        <p className="hero-subtitle">
-          Clean code. Thoughtful design. Real results.
-        </p>
-        <div className="hero-buttons">
-          <button className="hero-btn hero-btn-primary">View My Work</button>
-          <button className="hero-btn hero-btn-secondary">
-            Learn more <span>→</span>
-          </button>
-        </div>
-        <div className="scroll-indicator">Scroll</div>
-      </section>
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-      <section className="features">
-        <div className="features-inner">
-          <h2 className="features-title">What I do best.</h2>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">◈</div>
-              <h3 className="feature-title">Web Development</h3>
-              <p className="feature-desc">
-                Modern, responsive websites built with React and the latest technologies.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">◇</div>
-              <h3 className="feature-title">UI/UX Design</h3>
-              <p className="feature-desc">
-                Intuitive interfaces that look beautiful and feel natural to use.
-              </p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">○</div>
-              <h3 className="feature-title">Performance</h3>
-              <p className="feature-desc">
-                Fast, optimized code that delivers smooth user experiences.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+  return (
+    <section className="hero" id="home">
+      <h1 className="hero-title">
+        Crafting <span className="gradient">digital experiences</span> that leave an impression.
+      </h1>
+      <p className="hero-subtitle">
+        Full-stack developer specializing in building exceptional websites,
+        applications, and everything in between.
+      </p>
+      <div className="hero-buttons">
+        <button
+          className="hero-btn hero-btn-primary"
+          onClick={() => scrollToSection('blog')}
+        >
+          View My Work
+          <FiArrowRight />
+        </button>
+        <button
+          className="hero-btn hero-btn-secondary"
+          onClick={() => scrollToSection('contact')}
+        >
+          Get in Touch <span>→</span>
+        </button>
+      </div>
+      <div className="scroll-indicator">Scroll</div>
+    </section>
   );
 };
 

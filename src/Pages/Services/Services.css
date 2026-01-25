@@ -1,221 +1,214 @@
+/* ===== SERVICES SECTION ===== */
 .Services {
-  background: linear-gradient(135deg, #1f2731 0%, #2a3f5f 100%);
-  color: white;
-  padding: 4rem 2rem;
-  min-height: 100vh;
+  padding: var(--section-padding) 2rem;
+  background: var(--bg-secondary);
+  position: relative;
 }
 
 .services-container {
-  max-width: 1200px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
 .services-header {
   text-align: center;
   margin-bottom: 4rem;
-  animation: fadeInDown 0.8s ease-out;
 }
 
 .services-header h1 {
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
-  color: #e4d588;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services-header .subtitle {
-  font-size: 1.3rem;
-  color: #b0c4ff;
-  font-weight: 300;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
 }
 
 /* Services Grid */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 .service-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: var(--border-subtle);
+  border-radius: var(--radius-lg);
   padding: 2.5rem;
-  border-radius: 15px;
-  border: 1px solid rgba(228, 213, 136, 0.2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  text-align: center;
-  animation: fadeInUp 0.8s ease-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: var(--transition-base);
 }
 
 .service-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-10px);
-  border-color: #e4d588;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
+  border-color: rgba(88, 166, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.service-card:hover::before {
+  opacity: 0.05;
 }
 
 .service-icon {
-  font-size: 3.5rem;
-  color: #b0c4ff;
-  transition: color 0.3s ease;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
-.service-card:hover .service-icon {
-  color: #e4d588;
+.service-icon svg {
+  font-size: 1.75rem;
+  color: var(--text-primary);
 }
 
 .service-card h3 {
-  font-size: 1.5rem;
-  color: #b0c4ff;
-  margin: 0;
-  transition: color 0.3s ease;
-}
-
-.service-card:hover h3 {
-  color: #e4d588;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
 }
 
 .service-card p {
-  color: #d0d0d0;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
 }
 
 /* Process Section */
 .process-section {
-  margin-top: 4rem;
+  padding-top: 2rem;
 }
 
 .process-section h2 {
-  font-size: 2.5rem;
-  color: #e4d588;
-  margin-bottom: 3rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
 }
 
 .process-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
 }
 
 .process-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: var(--border-subtle);
+  border-radius: var(--radius-lg);
   padding: 2rem;
-  border-radius: 15px;
-  border: 1px solid rgba(228, 213, 136, 0.2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
   text-align: center;
-  animation: fadeInUp 0.8s ease-out;
+  transition: var(--transition-base);
   position: relative;
 }
 
 .process-card:hover {
-  background: rgba(255, 255, 255, 0.12);
   transform: translateY(-5px);
-  border-color: #e4d588;
+  border-color: rgba(88, 166, 255, 0.3);
 }
 
 .process-number {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: rgba(228, 213, 136, 0.3);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 1rem;
   line-height: 1;
 }
 
 .process-card h3 {
-  font-size: 1.4rem;
-  color: #b0c4ff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
 .process-card p {
-  color: #d0d0d0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
-/* Animations */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* Connecting lines between process cards */
+@media (min-width: 992px) {
+  .process-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -0.75rem;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--gradient-primary);
+    transform: translateY(-50%);
   }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .Services {
-    padding: 2rem 1rem;
-  }
-
-  .services-header h1 {
-    font-size: 2rem;
+    padding: 4rem 1.5rem;
   }
 
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .service-card {
     padding: 2rem;
   }
+}
 
-  .service-icon {
-    font-size: 2.5rem;
-  }
-
-  .service-card h3 {
-    font-size: 1.3rem;
-  }
-
-  .process-section h2 {
-    font-size: 1.8rem;
+@media (max-width: 480px) {
+  .services-header h1 {
+    font-size: 2rem;
   }
 
   .process-grid {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 480px) {
-  .services-header h1 {
-    font-size: 1.5rem;
-  }
-
-  .service-card {
-    padding: 1.5rem;
-  }
 
   .process-card {
     padding: 1.5rem;
-  }
-
-  .process-number {
-    font-size: 2.5rem;
   }
 }

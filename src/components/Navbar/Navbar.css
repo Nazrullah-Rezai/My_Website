@@ -1,295 +1,204 @@
+/* Modern Glassmorphism Navbar */
 .navbar {
   position: fixed;
   top: 0;
-  background-color: var(--main-color);
-  width: 100%;
-  height: auto;
-  padding: 0.8rem 1rem;
-  border-radius: 5px;
-  z-index: 100;
-  box-sizing: border-box;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  transition: var(--transition-base);
 }
 
-.Navbar.scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.Navbar-container {
-  margin: 0 auto;
-  padding: 0 1rem;
-  max-width: 1400px;
-  box-sizing: border-box;
-}
-
-.Navbar-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.Logo-wrapper {
-  transform: scale(0.6);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.Navbar .Logo-wrapper img {
-  width: 120px;
-  height: 90px;
-  border-radius: 5px;
-  display: block;
-}
-
-.Logo-wrapper:hover {
-  transform: scale(0.8);
-}
-
-.Navbar .Logo-wrapper::after,
-.Navbar .Logo-wrapper::before {
-  content: "";
+.navbar::before {
+  content: '';
   position: absolute;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  background-image: conic-gradient(
-    from var(--angle),
-    transparent 70%,
-    #e4d588,
-    #c2a662,
-    #ad8849,
-    #916027,
-    #e4d588
-  );
-  left: 50%;
-  top: 47%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  padding: 0 3px;
-  animation: spin 3s linear infinite;
+  inset: 0;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: var(--transition-base);
 }
 
-.Navbar .Logo-wrapper::before {
-  filter: blur(1.5rem);
-  opacity: 0.5;
-}
-
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes spin {
-  from {
-    --angle: 0deg;
-  }
-  to {
-    --angle: 360deg;
-  }
-}
-
-/* Navigation Items - Desktop */
-.Navbar .Nav-items {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.navbar-links button {
-  background: none;
-  border: none;
-  font-size: 0.75rem;
-  color: var(--white);
-  opacity: 0.8;
-  transition: opacity 0.3s;
-}
-
-.navbar-links button:hover {
+.navbar.scrolled::before {
   opacity: 1;
 }
 
-.navbar-cta {
-  background: var(--white) !important;
-  color: var(--bg) !important;
-  opacity: 1 !important;
-  padding: 0.4rem 1rem;
-  font-size: 0.75rem !important;
-  font-weight: 500;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  cursor: pointer;
-  transition: all 0.3s ease;
+.navbar-inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
-  padding: 0.5rem 0.8rem;
-  white-space: nowrap;
-  text-decoration: none;
-  display: inline-block;
+  z-index: 1;
 }
 
-.Navbar .Nav-btn:hover {
-  color: var(--nr-color);
+/* Logo */
+.navbar-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: var(--transition-base);
 }
 
-.Navbar .Nav-btn::before {
-  content: "";
-  background-color: var(--nr-color);
+.navbar-logo:hover {
+  transform: scale(1.02);
+}
+
+/* Nav Items */
+.Nav-items {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Nav-btn {
+  position: relative;
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  overflow: hidden;
+}
+
+.Nav-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: var(--transition-fast);
+  border-radius: inherit;
+}
+
+.Nav-btn:hover {
+  color: var(--text-primary);
+}
+
+.Nav-btn:hover::before {
+  opacity: 0.1;
+}
+
+/* Underline animation */
+.underline {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 2px;
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  transition: all 0.3s ease;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
 }
 
-.Navbar .Nav-btn:hover::before {
-  width: 100%;
+.Nav-btn:hover .underline {
+  width: calc(100% - 2rem);
+}
+
+/* CTA Button in Nav */
+.Nav-btn.cta {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  margin-left: 0.5rem;
+}
+
+.Nav-btn.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
+}
+
+.Nav-btn.cta::before {
+  display: none;
+}
+
+.Nav-btn.cta .underline {
+  display: none;
 }
 
 /* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--nr-color);
-  font-size: 1.5rem;
-  z-index: 101;
   padding: 0.5rem;
-  line-height: 1;
-  transition: all 0.3s ease;
+  color: var(--text-primary);
+  background: var(--bg-glass);
+  border-radius: var(--radius-sm);
+  border: var(--border-subtle);
+  transition: var(--transition-fast);
 }
 
 .mobile-menu-btn:hover {
-  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .menu-icon {
-  display: block;
+  width: 24px;
+  height: 24px;
 }
 
-/* Tablet - 1024px and below */
-@media (max-width: 1024px) {
-  .Navbar .Nav-btn {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  .Logo-wrapper {
-    transform: scale(0.55);
-  }
-
-  .Navbar .Nav-items {
-    gap: 0.3rem;
-  }
-}
-
-/* Tablets and larger mobile devices - 768px and below */
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .Navbar {
-    padding: 0.8rem 0.5rem;
+  .navbar {
+    padding: 1rem;
   }
 
-  .Navbar-container {
-    padding: 0 0.5rem;
-  }
-
-  .Navbar-flex {
-    gap: 0.5rem;
-  }
-
-  .Logo-wrapper {
-    transform: scale(0.5);
-  }
-
-  /* Show hamburger menu on mobile */
   .mobile-menu-btn {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  /* Hide nav items by default on mobile */
-  .Navbar .Nav-items {
-    position: absolute;
-    top: 100%;
+  .Nav-items {
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    flex-direction: column;
-    background-color: rgba(31, 39, 49, 0.98);
-    padding: 1rem 0;
-    gap: 0;
-    border-top: 2px solid var(--nr-color);
-    border-bottom: 1px solid rgba(228, 213, 136, 0.2);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    width: 100%;
-  }
-
-  /* Show nav items when mobile-open */
-  .Navbar .Nav-items.mobile-open {
-    max-height: 500px;
-    overflow-y: auto;
-  }
-
-  .Navbar .Nav-btn {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    text-align: left;
-    border: none;
-    border-radius: 0;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(228, 213, 136, 0.1);
-  }
-
-  .Navbar .Nav-btn::before {
     bottom: 0;
-    height: 2px;
-    width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    background: rgba(10, 10, 15, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--transition-base);
   }
 
-  .Navbar .Nav-btn:hover {
-    background-color: rgba(228, 213, 136, 0.1);
+  .Nav-items.mobile-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .Navbar .Nav-btn:hover::before {
+  .Nav-btn {
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
     width: 100%;
+    text-align: center;
+  }
+
+  .Nav-btn.cta {
+    margin-left: 0;
+    margin-top: 1rem;
   }
 }
 
-/* Small mobile devices - 480px and below */
 @media (max-width: 480px) {
-  .Navbar {
-    padding: 0.6rem 0.3rem;
-  }
-
-  .Navbar-container {
-    padding: 0 0.3rem;
-  }
-
-  .Navbar-flex {
-    gap: 0.3rem;
-  }
-
-  .Logo-wrapper {
-    transform: scale(0.45);
-  }
-
-  .Navbar .Nav-items {
-    padding: 0.8rem 0;
-  }
-
-  .Navbar .Nav-btn {
-    padding: 0.8rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .mobile-menu-btn {
-    padding: 0.3rem;
+  .navbar-logo {
+    font-size: 1.25rem;
   }
 }
