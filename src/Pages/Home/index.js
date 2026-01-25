@@ -21,7 +21,7 @@ const Home = () => {
           </div>
 
           <h1 className="hero-title">
-            Naz<span className="gradient">.</span>
+            Nazrullah<span className="gradient">.</span>
           </h1>
 
           <h2 className="hero-role">
