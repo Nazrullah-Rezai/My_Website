@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 8rem 2rem 4rem;
+  padding: 4rem 2rem;
   position: relative;
   overflow: hidden;
 }
@@ -17,8 +17,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
@@ -109,12 +109,12 @@
   background: var(--gradient-primary);
   color: var(--text-primary);
   border: none;
-  box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
 }
 
 .hero-btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(88, 166, 255, 0.4);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
 }
 
 .hero-btn-secondary {
@@ -196,7 +196,7 @@
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .hero {
-    padding: 6rem 1.5rem 3rem;
+    padding: 3rem 1.5rem;
   }
 
   .hero-buttons {
