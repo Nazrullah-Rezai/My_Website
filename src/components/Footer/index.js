@@ -1,17 +1,28 @@
-import React from "react";
+import { useI18n } from "../../utils/i18n";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
+  const { t } = useI18n();
+
   return (
-    <footer className="footer">
-      <div className="footer-inner">
-        <p className="footer-text">
-          &copy; {new Date().getFullYear()} Nazrullah Rezai
-        </p>
+    <footer>
+      <div className="footer-content">
         <div className="footer-links">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:hello@example.com">Email</a>
+          <Link to="/contact" className="footer-link">
+            {t("footer_contact")}
+          </Link>
+          <Link to="/imprint" className="footer-link">
+            {t("footer_imprint")}
+          </Link>
+          <Link to="/privacy" className="footer-link">
+            {t("footer_privacy")}
+          </Link>
+        </div>
+        <div className="footer-section">
+          <p className="footer-copyright">
+            &copy; {new Date().getFullYear()} Nazrullah Rezai. {t("footer_copyright")}.
+          </p>
         </div>
       </div>
     </footer>
