@@ -1,37 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { FiHome, FiUser, FiBriefcase, FiFolder, FiMail, FiChevronLeft, FiMenu, FiX, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
+import { useTheme } from "../../context/ThemeContext";
+import { useI18n } from "../../utils/i18n";
+import logoImage from "../../assets/images/Mein_Logo.png";
 import "./Navbar.css";
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
+  const { lang, setLang, t } = useI18n();
 
   const navItems = [
-    { id: "home", label: "Home", icon: FiHome },
-    { id: "about", label: "About", icon: FiUser },
-    { id: "services", label: "Services", icon: FiBriefcase },
-    { id: "blog", label: "Projects", icon: FiFolder },
-    { id: "contact", label: "Contact", icon: FiMail },
+    { id: "home", label: t("nav_home") },
+    { id: "about", label: t("nav_about") },
+    { id: "services", label: t("nav_services") },
+    { id: "blog", label: t("nav_projects") },
+    { id: "contact", label: t("nav_contact") },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => item.id);
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -43,90 +34,67 @@ const Sidebar = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       setIsMobileOpen(false);
+    } else {
+      window.location.href = "/#" + sectionId;
     }
   };
 
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
-  const toggleMobile = () => {
-    setIsMobileOpen(!isMobileOpen);
-  };
-
   return (
-    <>
-      {/* Mobile Menu Button */}
-      <button className="mobile-menu-btn" onClick={toggleMobile}>
-        {isMobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-      </button>
-
-      {/* Overlay for mobile */}
-      <div
-        className={`sidebar-overlay ${isMobileOpen ? 'visible' : ''}`}
-        onClick={() => setIsMobileOpen(false)}
-      />
-
-      {/* Sidebar */}
-      <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
-        {/* Header */}
-        <div className="sidebar-header">
-          <a href="#home" className="sidebar-logo" onClick={() => scrollToSection('home')}>
-            <div className="logo-icon">N</div>
-            <span className="logo-text">Naz.dev</span>
-          </a>
-          <button className="sidebar-toggle" onClick={toggleCollapse}>
-            <FiChevronLeft size={18} />
-          </button>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="navbar-logo">
+          <img src={logoImage} alt="Logo" className="logo-img" />
         </div>
 
-        {/* Navigation */}
-        <nav className="sidebar-nav">
-          <div className="nav-section">
-            <div className="nav-section-title">Navigation</div>
-            <div className="nav-items">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  className={`nav-item ${activeSection === item.id ? 'active' : ''}`}
-                  onClick={() => scrollToSection(item.id)}
-                  data-tooltip={item.label}
-                >
-                  <span className="nav-icon">
-                    <item.icon />
-                  </span>
-                  <span className="nav-label">{item.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </nav>
-
-        {/* Footer */}
-        <div className="sidebar-footer">
-          <button
-            className="sidebar-cta"
-            onClick={() => scrollToSection('contact')}
-          >
-            <FiMail className="cta-icon" />
-            <span className="cta-text">Get in Touch</span>
-          </button>
-
-          <div className="sidebar-socials">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
-              <FiGithub size={16} />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
-              <FiLinkedin size={16} />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="sidebar-social">
-              <FiTwitter size={16} />
-            </a>
-          </div>
+        {/* Desktop Menu */}
+        <div className="navbar-menu">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => scrollToSection(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
-      </aside>
-    </>
+
+        {/* Controls */}
+        <div className="navbar-controls">
+          <button className="theme-toggle" onClick={toggleTheme} title={isDark ? "Light Mode" : "Dark Mode"}>
+            {isDark ? "☀️" : "🌙"}
+          </button>
+          
+          <select value={lang} onChange={(e) => setLang(e.target.value)} className="lang-select">
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+            <option value="da">Dari</option>
+          </select>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button className="mobile-menu-btn" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+          {isMobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileOpen && (
+        <div className="navbar-mobile">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={`mobile-nav-link ${activeSection === item.id ? 'active' : ''}`}
+              onClick={() => scrollToSection(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 };
 
-export default Sidebar;
+export default Navbar;

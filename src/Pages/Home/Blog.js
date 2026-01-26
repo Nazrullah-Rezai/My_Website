@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./Blog.css";
 import { FaCalendar, FaArrowRight } from "react-icons/fa";
+import { useI18n } from "../../utils/i18n";
 
 const Blog = () => {
-  const projects = [
+  const { t } = useI18n();
+
+  const projects = useMemo(() => [
     {
       id: 1,
-      title: "TaxGo - Web Application",
-      description: "A modern web application for tax management built with React and Node.js. Features include real-time calculations and secure data handling.",
+      title: t("blog_project_1_title"),
+      description: t("blog_project_1_desc"),
       tags: ["React", "Node.js", "MongoDB", "Responsive Design"],
       image: "https://via.placeholder.com/400x300?text=TaxGo",
       link: "#",
@@ -15,8 +18,8 @@ const Blog = () => {
     },
     {
       id: 2,
-      title: "Portfolio Website",
-      description: "Personal portfolio website showcasing skills and projects. Built with React with modern animations and responsive design.",
+      title: t("blog_project_2_title"),
+      description: t("blog_project_2_desc"),
       tags: ["React", "CSS3", "Animations", "Responsive"],
       image: "https://via.placeholder.com/400x300?text=Portfolio",
       link: "#",
@@ -24,8 +27,8 @@ const Blog = () => {
     },
     {
       id: 3,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with product management, shopping cart, and payment integration.",
+      title: t("blog_project_3_title"),
+      description: t("blog_project_3_desc"),
       tags: ["React", "Express", "MongoDB", "Stripe"],
       image: "https://via.placeholder.com/400x300?text=E-Commerce",
       link: "#",
@@ -33,8 +36,8 @@ const Blog = () => {
     },
     {
       id: 4,
-      title: "Chat Application",
-      description: "Real-time chat application with user authentication and message persistence using Firebase.",
+      title: t("blog_project_4_title"),
+      description: t("blog_project_4_desc"),
       tags: ["React", "Firebase", "WebSockets", "Authentication"],
       image: "https://via.placeholder.com/400x300?text=Chat+App",
       link: "#",
@@ -42,8 +45,8 @@ const Blog = () => {
     },
     {
       id: 5,
-      title: "Weather Dashboard",
-      description: "Weather application displaying real-time weather data with beautiful UI and animations.",
+      title: t("blog_project_5_title"),
+      description: t("blog_project_5_desc"),
       tags: ["React", "API Integration", "CSS3", "Charts"],
       image: "https://via.placeholder.com/400x300?text=Weather",
       link: "#",
@@ -51,21 +54,21 @@ const Blog = () => {
     },
     {
       id: 6,
-      title: "Task Management App",
-      description: "Productivity app with task creation, management, and analytics features.",
+      title: t("blog_project_6_title"),
+      description: t("blog_project_6_desc"),
       tags: ["React", "Redux", "Local Storage", "UI/UX"],
       image: "https://via.placeholder.com/400x300?text=Task+Manager",
       link: "#",
       date: "Aug 2023",
     },
-  ];
+  ], [t]);
 
   return (
     <section className="Blog" id="blog">
       <div className="blog-container">
         <div className="blog-header">
-          <h1>My Projects</h1>
-          <p className="subtitle">Explore my latest work and creations</p>
+          <h1>{t("blog_title")}</h1>
+          <p className="subtitle">{t("blog_subtitle")}</p>
         </div>
 
         <div className="projects-grid">
@@ -76,7 +79,7 @@ const Blog = () => {
                 <div className="project-overlay">
                   <a href={project.link} className="project-link">
                     <FaArrowRight />
-                    View Project
+                    {t("blog_view_project")}
                   </a>
                 </div>
               </div>

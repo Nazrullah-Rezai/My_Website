@@ -1,85 +1,132 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
 import "./About.css";
 import { FaCode, FaGraduationCap, FaBriefcase, FaHeart } from "react-icons/fa";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
+import { useI18n } from "../../utils/i18n";
 
 const About = () => {
-  const skills = [
+  const { t } = useI18n();
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: introRef, isVisible: introVisible } = useScrollAnimation();
+  const { ref: skillsRef, isVisible: skillsVisible } = useScrollAnimation();
+  const { ref: timelineRef, isVisible: timelineVisible } = useScrollAnimation();
+  const { ref: valuesRef, isVisible: valuesVisible } = useScrollAnimation();
+
+  const skills = useMemo(() => [
     { category: "Frontend", items: ["React", "JavaScript", "HTML/CSS", "TypeScript", "Tailwind CSS"] },
     { category: "Backend", items: ["Node.js", "Express", "MongoDB", "Firebase", "REST APIs"] },
     { category: "Tools", items: ["Git", "VS Code", "npm/yarn", "webpack", "Docker"] },
     { category: "Other", items: ["Responsive Design", "UI/UX", "Problem Solving", "Team Work"] },
-  ];
+  ], []);
 
-  const timeline = [
+  const timeline = useMemo(() => [
     {
       year: "2020",
-      title: "Web Development Journey Started",
-      description: "Began learning web development with a passion for creating beautiful and functional websites.",
+      title: t("about_timeline_2020_title"),
+      description: t("about_timeline_2020_desc"),
     },
     {
       year: "2021",
-      title: "React Mastery",
-      description: "Deep dive into React.js and modern JavaScript frameworks. Built multiple projects.",
+      title: t("about_timeline_2021_title"),
+      description: t("about_timeline_2021_desc"),
     },
     {
       year: "2022",
-      title: "Full Stack Development",
-      description: "Expanded skills to backend development with Node.js and database management.",
+      title: t("about_timeline_2022_title"),
+      description: t("about_timeline_2022_desc"),
     },
     {
       year: "2024",
-      title: "Professional Developer",
-      description: "Currently working on innovative web solutions and mentoring aspiring developers.",
+      title: t("about_timeline_2024_title"),
+      description: t("about_timeline_2024_desc"),
     },
-  ];
+  ], [t]);
 
   return (
     <section className="About" id="about">
       <div className="about-container">
-        <div className="about-header">
-          <h1>About Me</h1>
-          <p className="subtitle">A passionate web developer from Darmstadt</p>
-        </div>
+        <motion.div 
+          ref={headerRef}
+          className="about-header"
+          initial={{ opacity: 0, y: -30 }}
+          animate={headerVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h1>{t("about_title")}</h1>
+          <p className="subtitle">{t("about_subtitle")}</p>
+        </motion.div>
 
         {/* Intro Section */}
-        <div className="about-intro">
+        <motion.div 
+          ref={introRef}
+          className="about-intro"
+          initial={{ opacity: 0, x: -50 }}
+          animate={introVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
           <div className="intro-text">
-            <h2>Who I Am</h2>
-            <p>
-              I'm Nazrullah Rezai, a full-stack web developer with a passion for creating modern, responsive, and user-friendly web applications. With expertise in React, JavaScript, and modern web technologies, I transform ideas into digital solutions.
-            </p>
-            <p>
-              Based in Darmstadt, Germany, I work with both startups and established companies to build web applications that users love. My approach combines clean code, modern design principles, and attention to user experience.
-            </p>
+            <h2>{t("about_intro_title")}</h2>
+            <p>{t("about_intro_p1")}</p>
+            <p>{t("about_intro_p2")}</p>
           </div>
-          <div className="intro-icon">
+          <motion.div 
+            className="intro-icon"
+            whileHover={{ scale: 1.1, rotate: 10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
             <FaCode size={80} />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Skills Section */}
-        <div className="skills-section">
-          <h2>My Skills</h2>
+        <motion.div 
+          ref={skillsRef}
+          className="skills-section"
+          initial={{ opacity: 0, y: 40 }}
+          animate={skillsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2>{t("about_skills_title")}</h2>
           <div className="skills-grid">
             {skills.map((skillGroup, index) => (
-              <div key={index} className="skill-group">
+              <motion.div 
+                key={index} 
+                className="skill-group"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={skillsVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                whileHover={{ y: -5 }}
+              >
                 <h3>{skillGroup.category}</h3>
                 <ul>
                   {skillGroup.items.map((skill, idx) => (
                     <li key={idx}>{skill}</li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Timeline Section */}
-        <div className="timeline-section">
-          <h2>My Journey</h2>
+        <motion.div 
+          ref={timelineRef}
+          className="timeline-section"
+          initial={{ opacity: 0 }}
+          animate={timelineVisible ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2>{t("about_timeline_title")}</h2>
           <div className="timeline">
             {timeline.map((item, index) => (
-              <div key={index} className="timeline-item">
+              <motion.div 
+                key={index} 
+                className="timeline-item"
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                animate={timelineVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
+              >
                 <div className="timeline-marker">
                   <div className="timeline-dot"></div>
                   {index < timeline.length - 1 && <div className="timeline-line"></div>}
@@ -89,37 +136,43 @@ const About = () => {
                   <h4>{item.title}</h4>
                   <p>{item.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Values Section */}
-        <div className="values-section">
-          <h2>What I Value</h2>
+        <motion.div 
+          ref={valuesRef}
+          className="values-section"
+          initial={{ opacity: 0, y: 40 }}
+          animate={valuesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2>{t("about_values_title")}</h2>
           <div className="values-grid">
             <div className="value-card">
               <FaCode size={40} />
-              <h3>Clean Code</h3>
-              <p>Writing maintainable, readable, and efficient code is a priority.</p>
+              <h3>{t("about_values_clean_title")}</h3>
+              <p>{t("about_values_clean_desc")}</p>
             </div>
             <div className="value-card">
               <FaHeart size={40} />
-              <h3>User Experience</h3>
-              <p>Creating intuitive interfaces that users enjoy is essential.</p>
+              <h3>{t("about_values_ux_title")}</h3>
+              <p>{t("about_values_ux_desc")}</p>
             </div>
             <div className="value-card">
               <FaBriefcase size={40} />
-              <h3>Innovation</h3>
-              <p>Staying updated with latest technologies and best practices.</p>
+              <h3>{t("about_values_innov_title")}</h3>
+              <p>{t("about_values_innov_desc")}</p>
             </div>
             <div className="value-card">
               <FaGraduationCap size={40} />
-              <h3>Learning</h3>
-              <p>Continuous improvement and sharing knowledge with others.</p>
+              <h3>{t("about_values_learn_title")}</h3>
+              <p>{t("about_values_learn_desc")}</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

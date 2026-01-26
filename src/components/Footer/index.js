@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiGithub, FiLinkedin, FiTwitter, FiMail } from "react-icons/fi";
 import "./Footer.css";
+import { useI18n } from "../../utils/i18n";
 
 const Footer = () => {
+  const { t } = useI18n();
   const currentYear = new Date().getFullYear();
 
   const scrollToSection = (e, sectionId) => {
@@ -11,6 +13,8 @@ const Footer = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = "/#" + sectionId;
     }
   };
 
@@ -27,22 +31,22 @@ const Footer = () => {
 
         <div className="footer-links">
           <a href="#about" className="footer-link" onClick={(e) => scrollToSection(e, "about")}>
-            About
+            {t("nav_about")}
           </a>
           <a href="#services" className="footer-link" onClick={(e) => scrollToSection(e, "services")}>
-            Services
+            {t("nav_services")}
           </a>
           <a href="#portfolio" className="footer-link" onClick={(e) => scrollToSection(e, "portfolio")}>
-            Portfolio
+            {t("footer_portfolio")}
           </a>
           <a href="#contact" className="footer-link" onClick={(e) => scrollToSection(e, "contact")}>
-            Contact
+            {t("nav_contact")}
           </a>
           <Link to="/imprint" className="footer-link">
-            Imprint
+            {t("footer_imprint")}
           </Link>
           <Link to="/privacy" className="footer-link">
-            Privacy
+            {t("footer_privacy")}
           </Link>
         </div>
 
@@ -84,7 +88,7 @@ const Footer = () => {
         </div>
 
         <p className="footer-copyright">
-          © {currentYear} Nazrullah Rezai. All rights reserved.
+          © {currentYear} Nazrullah Rezai. {t("footer_copyright")}
         </p>
       </div>
     </footer>

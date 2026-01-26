@@ -1,30 +1,38 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./Contact.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
+import { useI18n } from "../../utils/i18n";
 
 const Contact = () => {
+  const { t } = useI18n();
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: infoRef, isVisible: infoVisible } = useScrollAnimation();
+  const { ref: formRef, isVisible: formVisible } = useScrollAnimation();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Danke für deine Nachricht! Ich werde mich bald bei dir melden.");
+    alert(t("contact_alert"));
   };
 
   const contactInfo = [
     {
       icon: <FaEnvelope />,
-      title: "Email",
+      title: t("contact_email_title"),
       value: "nasrollah.rzi@gmail.com",
       link: "mailto:nasrollah.rzi@gmail.com",
     },
     {
       icon: <FaPhone />,
-      title: "Phone",
+      title: t("contact_phone_title"),
       value: "+49 (0) 123 456789",
       link: "tel:+49123456789",
     },
     {
       icon: <FaMapMarkerAlt />,
-      title: "Location",
-      value: "Darmstadt, Germany",
+      title: t("contact_location_title"),
+      value: t("contact_location_value"),
       link: "#",
     },
   ];
@@ -32,73 +40,114 @@ const Contact = () => {
   return (
     <section className="Contact" id="contact">
       <div className="contact-container">
-        <div className="contact-header">
-          <h1>Get In Touch</h1>
-          <p className="subtitle">Let's create something amazing together</p>
-        </div>
+        <motion.div 
+          ref={headerRef}
+          className="contact-header"
+          initial={{ opacity: 0, y: -30 }}
+          animate={headerVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h1>{t("contact_title")}</h1>
+          <p className="subtitle">{t("contact_subtitle")}</p>
+        </motion.div>
 
         <div className="contact-content">
           {/* Contact Info */}
-          <div className="contact-info">
-            <h2>Contact Information</h2>
+          <motion.div 
+            ref={infoRef}
+            className="contact-info"
+            initial={{ opacity: 0, x: -50 }}
+            animate={infoVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <h2>{t("contact_info_title")}</h2>
             <div className="info-cards">
               {contactInfo.map((info, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={info.link}
                   className="info-card"
                   target={info.link.startsWith("mailto") ? "_self" : "_blank"}
                   rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={infoVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                  whileHover={{ y: -8, boxShadow: "0 15px 35px rgba(212, 175, 55, 0.2)" }}
                 >
                   <div className="info-icon">{info.icon}</div>
                   <h3>{info.title}</h3>
                   <p>{info.value}</p>
-                </a>
+                </motion.a>
               ))}
             </div>
 
-            <div className="social-links">
-              <h2>Connect With Me</h2>
+            <motion.div 
+              className="social-links"
+              initial={{ opacity: 0, y: 20 }}
+              animate={infoVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
+            >
+              <h2>{t("contact_connect_title")}</h2>
               <div className="social-buttons">
-                <a href="https://github.com/Nazrullah-Rezai" target="_blank" rel="noopener noreferrer" className="social-btn github">
-                  GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/nazrullah-rezai" target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
-                  LinkedIn
-                </a>
+                <motion.a 
+                  href="https://github.com/Nazrullah-Rezai" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="social-btn github"
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(212, 175, 55, 0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {t("contact_social_github")}
+                </motion.a>
+                <motion.a 
+                  href="https://www.linkedin.com/in/nazrullah-rezai" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="social-btn linkedin"
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(212, 175, 55, 0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {t("contact_social_linkedin")}
+                </motion.a>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="contact-form-wrapper">
-            <h2>Send Me a Message</h2>
+          <motion.div 
+            ref={formRef}
+            className="contact-form-wrapper"
+            initial={{ opacity: 0, x: 50 }}
+            animate={formVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <h2>{t("contact_form_title")}</h2>
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="name">Name *</label>
-                <input type="text" id="name" name="name" required placeholder="Your Name" />
+                <label htmlFor="name">{t("contact_form_name")}</label>
+                <input type="text" id="name" name="name" required placeholder={t("contact_form_name_ph")} />
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email *</label>
-                <input type="email" id="email" name="email" required placeholder="your@email.com" />
+                <label htmlFor="email">{t("contact_form_email")}</label>
+                <input type="email" id="email" name="email" required placeholder={t("contact_form_email_ph")} />
               </div>
 
               <div className="form-group">
-                <label htmlFor="subject">Subject *</label>
-                <input type="text" id="subject" name="subject" required placeholder="What is this about?" />
+                <label htmlFor="subject">{t("contact_form_subject")}</label>
+                <input type="text" id="subject" name="subject" required placeholder={t("contact_form_subject_ph")} />
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Message *</label>
-                <textarea id="message" name="message" rows="6" required placeholder="Your message here..."></textarea>
+                <label htmlFor="message">{t("contact_form_message")}</label>
+                <textarea id="message" name="message" rows="6" required placeholder={t("contact_form_message_ph")}></textarea>
               </div>
 
               <button type="submit" className="submit-btn">
-                Send Message
+                {t("contact_form_submit")}
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
