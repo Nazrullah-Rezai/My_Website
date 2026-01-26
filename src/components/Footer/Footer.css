@@ -1,8 +1,7 @@
-/* Modern Minimal Footer */
+/* ===== ULTRA MODERN FOOTER ===== */
 footer {
-  padding: 3rem 2rem;
+  padding: 4rem 2rem 2rem;
   background: var(--bg-secondary);
-  border-top: var(--border-subtle);
   position: relative;
 }
 
@@ -10,11 +9,10 @@ footer::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: var(--gradient-primary);
+  background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.3), transparent);
 }
 
 .footer-content {
@@ -23,13 +21,13 @@ footer::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 /* Footer Logo/Brand */
 .footer-brand {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
@@ -41,17 +39,21 @@ footer::before {
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem;
   flex-wrap: wrap;
 }
 
 .footer-link {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   padding: 0.5rem;
-  transition: var(--transition-fast);
+  transition: all 0.3s ease;
   position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .footer-link::after {
@@ -63,8 +65,8 @@ footer::before {
   width: 0;
   height: 2px;
   background: var(--gradient-primary);
-  transition: var(--transition-fast);
-  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+  border-radius: 1px;
 }
 
 .footer-link:hover {
@@ -82,40 +84,43 @@ footer::before {
 }
 
 .footer-social {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-glass);
-  border: var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 50%;
   color: var(--text-secondary);
-  font-size: 1rem;
-  transition: var(--transition-fast);
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .footer-social:hover {
-  background: var(--accent-primary);
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-  transform: translateY(-3px);
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(244, 63, 94, 0.3);
 }
 
 /* Copyright */
 .footer-copyright {
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   text-align: center;
 }
 
 .footer-copyright a {
   color: var(--accent-primary);
-  transition: var(--transition-fast);
+  transition: color 0.3s ease;
+  text-decoration: none;
 }
 
 .footer-copyright a:hover {
-  color: var(--accent-secondary);
+  color: var(--accent-tertiary);
 }
 
 /* Footer Bottom */
@@ -124,37 +129,84 @@ footer::before {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-top: 2rem;
-  border-top: var(--border-subtle);
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   margin-top: 1rem;
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  footer {
+    padding: 3rem 2rem 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   footer {
-    padding: 2rem 1rem;
+    padding: 3rem 1.25rem 1.5rem;
   }
 
   .footer-content {
-    gap: 1.5rem;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    font-size: 1.5rem;
   }
 
   .footer-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 2rem;
+  }
+
+  .footer-link {
+    font-size: 0.9rem;
+    padding: 0.375rem;
+  }
+
+  .footer-socials {
+    gap: 0.875rem;
+  }
+
+  .footer-social {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.85rem;
   }
 
   .footer-bottom {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding-top: 2rem;
   }
 }
 
 @media (max-width: 480px) {
+  footer {
+    padding: 2.5rem 1rem 1.25rem;
+  }
+
+  .footer-content {
+    gap: 1.5rem;
+  }
+
   .footer-brand {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+  }
+
+  .footer-links {
+    gap: 0.5rem 1.5rem;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
   }
 
   .footer-socials {
@@ -164,5 +216,10 @@ footer::before {
   .footer-social {
     width: 36px;
     height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
   }
 }
