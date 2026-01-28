@@ -112,8 +112,7 @@ const Portfolio = () => {
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
           whileHover={{ scale: 1.05 }}
         >
-          <img src={profileImage} alt="Nazrullah Rezai" />
-          <div className="image-glow"></div>
+          <img src={profileImage} alt="Nazrullah Rezai" loading="lazy" />
         </motion.div>
 
         <motion.div 

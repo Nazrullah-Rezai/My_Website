@@ -82,6 +82,9 @@ const enDictionary = {
   contact_form_message: "Message *",
   contact_form_message_ph: "Your message here...",
   contact_form_submit: "Send Message",
+  contact_sending: "Sending...",
+  contact_success: "Thanks! Your message was sent. I'll reply soon.",
+  contact_error: "Something went wrong. Please try again.",
   contact_alert: "Thanks for your message! I'll get back to you soon.",
   contact_email_title: "Email",
   contact_phone_title: "Phone",
@@ -107,6 +110,8 @@ const enDictionary = {
   blog_project_5_desc: "Weather application displaying real-time weather data with beautiful UI and animations.",
   blog_project_6_title: "Task Management App",
   blog_project_6_desc: "Productivity app with task creation, management, and analytics features.",
+  blog_project_7_title: "SolarEdge Energy Plugin",
+  blog_project_7_desc: "Energy monitoring widget for photovoltaic systems. Built with C#, REST API, and Visual Studio to display real-time power consumption, solar generation, battery status, and energy autonomy metrics from SolarEdge Cloud API.",
 };
 
 export default enDictionary;

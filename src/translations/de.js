@@ -82,6 +82,9 @@ const deDictionary = {
   contact_form_message: "Nachricht *",
   contact_form_message_ph: "Deine Nachricht ...",
   contact_form_submit: "Senden",
+  contact_sending: "Wird gesendet...",
+  contact_success: "Danke! Deine Nachricht wurde versendet. Ich melde mich bald.",
+  contact_error: "Leider gab es ein Problem. Bitte versuche es erneut.",
   contact_alert: "Danke für deine Nachricht! Ich melde mich bald.",
   contact_email_title: "Email",
   contact_phone_title: "Telefon",
@@ -107,6 +110,8 @@ const deDictionary = {
   blog_project_5_desc: "Wetter-Anwendung mit Echtzeit-Daten, schönem UI und Animationen.",
   blog_project_6_title: "Aufgabenverwaltungs-App",
   blog_project_6_desc: "Produktivitäts-App mit Aufgabenerstellung, Verwaltung und Analyse-Features.",
+  blog_project_7_title: "SolarEdge Energie-Plugin",
+  blog_project_7_desc: "Energie-Überwachungs-Widget für Photovoltaikanlagen. Entwickelt mit C#, REST API und Visual Studio zur Anzeige von Echtzeit-Stromverbrauch, Solarstromerzeugung, Batteriewerte und Autarkie-Metriken von SolarEdge Cloud API.",
 };
 
 export default deDictionary;

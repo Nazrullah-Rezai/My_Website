@@ -82,6 +82,9 @@ const daDictionary = {
   contact_form_message: "پیام *",
   contact_form_message_ph: "پیام خود را بنویسید...",
   contact_form_submit: "ارسال",
+  contact_sending: "در حال ارسال...",
+  contact_success: "ممنون! پیام شما ارسال شد. به زودی پاسخ می‌دهم.",
+  contact_error: "خطایی رخ داد. لطفا دوباره تلاش کنید.",
   contact_alert: "ممنون از پیام شما! به زودی پاسخ می‌دهم.",
   contact_email_title: "ایمیل",
   contact_phone_title: "تلفن",
@@ -107,6 +110,8 @@ const daDictionary = {
   blog_project_5_desc: "اپلیکیشن هواشناسی با داده‌های بلادرنگ، رابط زیبا و انیمیشن‌ها.",
   blog_project_6_title: "اپ مدیریت وظایف",
   blog_project_6_desc: "اپلیکیشن بهره‌وری با ایجاد وظایف، مدیریت و ویژگی‌های تجزیه و تحلیل.",
+  blog_project_7_title: "افزونه انرژی SolarEdge",
+  blog_project_7_desc: "ابزار نظارت انرژی برای سیستم‌های خورشیدی. ساخته‌شده با C#، REST API و Visual Studio برای نمایش مصرف برق بلادرنگ، تولید انرژی خورشیدی، وضعیت باتری و شاخص‌های خودکفایی انرژی از SolarEdge Cloud API.",
 };
 
 export default daDictionary;

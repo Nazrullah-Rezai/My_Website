@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import React, { useState, useEffect, useMemo } from "react";
+import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
 import { useI18n } from "../../utils/i18n";
 import logoImage from "../../assets/images/Mein_Logo.png";
@@ -12,13 +12,16 @@ const Navbar = () => {
   const { isDark, toggleTheme } = useTheme();
   const { lang, setLang, t } = useI18n();
 
-  const navItems = [
-    { id: "home", label: t("nav_home") },
-    { id: "about", label: t("nav_about") },
-    { id: "services", label: t("nav_services") },
-    { id: "blog", label: t("nav_projects") },
-    { id: "contact", label: t("nav_contact") },
-  ];
+  const navItems = useMemo(
+    () => [
+      { id: "home", label: t("nav_home") },
+      { id: "about", label: t("nav_about") },
+      { id: "services", label: t("nav_services") },
+      { id: "blog", label: t("nav_projects") },
+      { id: "contact", label: t("nav_contact") },
+    ],
+    [t]
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +31,35 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const setActiveOnScroll = () => {
+      const probe = window.scrollY + window.innerHeight * 0.25; // watch a point 25% below top
+      let current = navItems[0]?.id || "home";
+
+      navItems.forEach((item) => {
+        const el = document.getElementById(item.id);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const top = rect.top + window.scrollY;
+        const bottom = top + el.offsetHeight;
+        if (probe >= top && probe < bottom) {
+          current = item.id;
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    setActiveOnScroll();
+    window.addEventListener("scroll", setActiveOnScroll, { passive: true });
+    window.addEventListener("resize", setActiveOnScroll);
+
+    return () => {
+      window.removeEventListener("scroll", setActiveOnScroll);
+      window.removeEventListener("resize", setActiveOnScroll);
+    };
+  }, [navItems]);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -44,7 +76,7 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo">
-          <img src={logoImage} alt="Logo" className="logo-img" />
+          <img src={logoImage} alt="Logo" className="logo-img" loading="lazy" />
         </div>
 
         {/* Desktop Menu */}
@@ -62,8 +94,14 @@ const Navbar = () => {
 
         {/* Controls */}
         <div className="navbar-controls">
-          <button className="theme-toggle" onClick={toggleTheme} title={isDark ? "Light Mode" : "Dark Mode"}>
-            {isDark ? "☀️" : "🌙"}
+          <button
+            className={`theme-toggle ${isDark ? "is-dark" : "is-light"}`}
+            onClick={toggleTheme}
+            title={isDark ? "Light Mode" : "Dark Mode"}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            type="button"
+          >
+            {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
           </button>
           
           <select value={lang} onChange={(e) => setLang(e.target.value)} className="lang-select">

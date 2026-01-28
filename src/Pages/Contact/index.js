@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import "./Contact.css";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 import { useI18n } from "../../utils/i18n";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const form = useRef();
   const { t } = useI18n();
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
   const { ref: infoRef, isVisible: infoVisible } = useScrollAnimation();
   const { ref: formRef, isVisible: formVisible } = useScrollAnimation();
+  const [formStatus, setFormStatus] = useState({ state: "idle", message: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(t("contact_alert"));
-  };
+
 
   const contactInfo = [
     {
@@ -26,8 +26,8 @@ const Contact = () => {
     {
       icon: <FaPhone />,
       title: t("contact_phone_title"),
-      value: "+49 (0) 123 456789",
-      link: "tel:+49123456789",
+      value: "+49 171 2337149",
+      link: "tel:+491712337149",
     },
     {
       icon: <FaMapMarkerAlt />,
@@ -36,6 +36,34 @@ const Contact = () => {
       link: "#",
     },
   ];
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setFormStatus({ state: "loading", message: t("contact_sending") });
+
+    const formData = new FormData(e.target);
+    const payload = {
+      name: formData.get("name") || "",
+      email: formData.get("email") || "",
+      subject: formData.get("subject") || "",
+      message: formData.get("message") || "",
+    };
+
+    emailjs
+      .sendForm('service_vopeyqw', 'template_mi4mgz8', form.current, {
+        publicKey: 'Rsz-9OF0bu63HmNsj',
+      })
+      .then(
+        () => {
+          setFormStatus({ state: "success", message: t("contact_success") });
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          setFormStatus({ state: "error", message: t("contact_error") });
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
 
   return (
     <section className="Contact" id="contact">
@@ -122,7 +150,7 @@ const Contact = () => {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <h2>{t("contact_form_title")}</h2>
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <form className="contact-form" onSubmit={sendEmail} ref={form}>
               <div className="form-group">
                 <label htmlFor="name">{t("contact_form_name")}</label>
                 <input type="text" id="name" name="name" required placeholder={t("contact_form_name_ph")} />
@@ -143,9 +171,15 @@ const Contact = () => {
                 <textarea id="message" name="message" rows="6" required placeholder={t("contact_form_message_ph")}></textarea>
               </div>
 
-              <button type="submit" className="submit-btn">
-                {t("contact_form_submit")}
+              <button type="submit" className="submit-btn" disabled={formStatus.state === "loading"}>
+                {formStatus.state === "loading" ? t("contact_sending") : t("contact_form_submit")}
               </button>
+
+              {formStatus.state !== "idle" && (
+                <p className={`form-status ${formStatus.state}`}>
+                  {formStatus.message}
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

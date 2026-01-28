@@ -13,9 +13,8 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
 }
-
 .blog-container {
   max-width: var(--container-width);
   margin: 0 auto;

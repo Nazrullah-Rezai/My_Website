@@ -77,6 +77,8 @@ const Services = () => {
     },
   ], [t]);
 
+  const marqueeProcess = useMemo(() => [...process, ...process], [process]);
+
   return (
     <section className="Services" id="services">
       <div className="services-container">
@@ -125,20 +127,22 @@ const Services = () => {
         >
           <h2>{t("services_process_title")}</h2>
           <div className="process-grid">
-            {process.map((step, index) => (
-              <motion.div 
-                key={index} 
-                className="process-card"
-                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-                animate={processVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="process-number">{step.number}</div>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </motion.div>
-            ))}
+            <div className="process-track">
+              {marqueeProcess.map((step, index) => (
+                <motion.div 
+                  key={`${step.number}-${index}`}
+                  className="process-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={processVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ delay: (index % process.length) * 0.08, duration: 0.5, ease: "easeOut" }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="process-number">{step.number}</div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
