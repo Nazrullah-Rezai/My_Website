@@ -163,6 +163,7 @@
   position: relative;
   overflow: hidden;
   padding: 0.5rem 0;
+  display: flex;
 }
 
 .process-grid::before {
@@ -183,13 +184,12 @@
   align-items: stretch;
   gap: var(--process-gap);
   width: max-content;
-  animation: marquee 22s linear infinite;
+  animation: marquee 44s linear infinite;
   will-change: transform;
+  /* add a small padding-right so there's a gap between end and start — avoids abrupt overlap */
+  padding-right: var(--process-gap);
 }
 
-.process-grid:hover .process-track {
-  animation-play-state: paused;
-}
 
 .process-card {
   background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
@@ -358,6 +358,6 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }

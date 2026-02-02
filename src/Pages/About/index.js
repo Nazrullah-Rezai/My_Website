@@ -22,20 +22,16 @@ const About = () => {
 
   const timeline = useMemo(() => [
     {
-      year: "2020",
-      title: t("about_timeline_2020_title"),
-      description: t("about_timeline_2020_desc"),
-    },
-    {
-      year: "2021",
-      title: t("about_timeline_2021_title"),
-      description: t("about_timeline_2021_desc"),
-    },
-    {
       year: "2022",
       title: t("about_timeline_2022_title"),
       description: t("about_timeline_2022_desc"),
     },
+    {
+      year: "2023",
+      title: t("about_timeline_2023_title"),
+      description: t("about_timeline_2023_desc"),
+    },
+   
     {
       year: "2024",
       title: t("about_timeline_2024_title"),

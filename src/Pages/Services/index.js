@@ -77,7 +77,8 @@ const Services = () => {
     },
   ], [t]);
 
-  const marqueeProcess = useMemo(() => [...process, ...process], [process]);
+  // For a CSS-only marquee we render two identical tracks side-by-side.
+  // Keep `process` as the single source of items and render it twice below.
 
   return (
     <section className="Services" id="services">
@@ -128,19 +129,23 @@ const Services = () => {
           <h2>{t("services_process_title")}</h2>
           <div className="process-grid">
             <div className="process-track">
-              {marqueeProcess.map((step, index) => (
-                <motion.div 
-                  key={`${step.number}-${index}`}
-                  className="process-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={processVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ delay: (index % process.length) * 0.08, duration: 0.5, ease: "easeOut" }}
-                  whileHover={{ scale: 1.05 }}
-                >
+              {process.map((step, index) => (
+                <div key={`${step.number}-${index}`} className="process-card">
                   <div className="process-number">{step.number}</div>
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
-                </motion.div>
+                </div>
+              ))}
+            </div>
+
+            {/* Duplicate the track for the seamless CSS marquee loop. */}
+            <div className="process-track" aria-hidden="true">
+              {process.map((step, index) => (
+                <div key={`dup-${step.number}-${index}`} className="process-card">
+                  <div className="process-number">{step.number}</div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
               ))}
             </div>
           </div>
