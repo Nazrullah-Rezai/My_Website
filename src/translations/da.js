@@ -46,7 +46,7 @@ const daDictionary = {
   services_responsive_title: "طراحی ریسپانسیو",
   services_responsive_desc: "طراحی اول موبایل که در همه دستگاه‌ها عالی دیده شود.",
   services_backend_title: "توسعه بک‌اند",
-  services_backend_desc: "برنامه‌های سمت سرور با Node.js, Express, MongoDB.",
+  services_backend_desc: "توسعه برنامه‌های سمت سرور با C# و .NET.",
   services_perf_title: "بهینه‌سازی کارایی",
   services_perf_desc: "بهینه‌سازی برای سرعت، کارایی و تجربه بهتر.",
   services_uiux_title: "طراحی UI/UX",

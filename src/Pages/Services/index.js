@@ -137,17 +137,6 @@ const Services = () => {
                 </div>
               ))}
             </div>
-
-            {/* Duplicate the track for the seamless CSS marquee loop. */}
-            <div className="process-track" aria-hidden="true">
-              {process.map((step, index) => (
-                <div key={`dup-${step.number}-${index}`} className="process-card">
-                  <div className="process-number">{step.number}</div>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </motion.div>
       </div>

@@ -45,7 +45,7 @@ const deDictionary = {
   services_responsive_title: "Responsive Design",
   services_responsive_desc: "Mobile-first Designs, die auf allen Geräten großartig aussehen.",
   services_backend_title: "Backend Entwicklung",
-  services_backend_desc: "Robuste Server-Anwendungen mit Node.js, Express und MongoDB.",
+  services_backend_desc: "Robuste Server-Anwendungen mit C# und .NET.",
   services_perf_title: "Performance Optimierung",
   services_perf_desc: "Optimierung für Geschwindigkeit, Effizienz und bessere UX.",
   services_uiux_title: "UI/UX Design",

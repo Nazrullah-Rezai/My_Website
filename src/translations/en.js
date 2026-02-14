@@ -44,7 +44,7 @@ const enDictionary = {
   services_responsive_title: "Responsive Design",
   services_responsive_desc: "Creating mobile-first designs that look great on all devices and screen sizes.",
   services_backend_title: "Backend Development",
-  services_backend_desc: "Developing robust server-side applications with Node.js, Express, and MongoDB.",
+  services_backend_desc: "Developing robust server-side applications with C# and .NET.",
   services_perf_title: "Performance Optimization",
   services_perf_desc: "Optimizing applications for speed, efficiency, and better user experience.",
   services_uiux_title: "UI/UX Design",

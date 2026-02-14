@@ -14,9 +14,9 @@ const About = () => {
   const { ref: valuesRef, isVisible: valuesVisible } = useScrollAnimation();
 
   const skills = useMemo(() => [
-    { category: "Frontend", items: ["React", "JavaScript", "HTML/CSS", "TypeScript", "Tailwind CSS"] },
-    { category: "Backend", items: ["Node.js", "Express", "MongoDB", "Firebase", "REST APIs"] },
-    { category: "Tools", items: ["Git", "VS Code", "npm/yarn", "webpack", "Docker"] },
+    { category: "Frontend", items: ["React", "JavaScript (ES6+)", "HTML5", "CSS3", "TypeScript", "Tailwind CSS"] },
+    { category: "Backend", items: ["Node.js", "Express", "MongoDB", "SQL", "MySQL", "REST APIs"] },
+    { category: "Tools", items: ["Git", "VS Code", "npm/yarn", "Azure DevOps","GitHub", "Visual Studio"] },
     { category: "Other", items: ["Responsive Design", "UI/UX", "Problem Solving", "Team Work"] },
   ], []);
 
@@ -33,7 +33,7 @@ const About = () => {
     },
    
     {
-      year: "2024",
+      year: "2025",
       title: t("about_timeline_2024_title"),
       description: t("about_timeline_2024_desc"),
     },
