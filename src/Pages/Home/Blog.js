@@ -12,7 +12,7 @@ const Blog = () => {
       id: 2,
       title: t("blog_project_2_title"),
       description: t("blog_project_2_desc"),
-      tags: ["React", "Framer Motion", "CSS3", "HTML5", "Responsive"],
+      tags: ["JavaScript","React", "Framer Motion", "CSS3", "HTML5", "Responsive", ],
       image: mein_logo,
       link: "https://github.com/Nazrullah-Rezai/My_Website",
       date: "Jan 2026",
