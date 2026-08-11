@@ -1,26 +1,30 @@
 import emailjs from "@emailjs/browser";
 
-// Initialize EmailJS (Public Key)
-const PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
-const SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
-const TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY_2;
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID_2;
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID_2;
 
 emailjs.init(PUBLIC_KEY);
 
 export const sendContactEmail = async (formData) => {
   try {
-    const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      to_email: "nasrollah.rzi@gmail.com",
-      from_name: formData.name,
-      from_email: formData.email,
-      subject: formData.subject || "Neue Kontaktanfrage",
-      message: formData.message,
-      phone: formData.phone || "Nicht angegeben",
-    });
+    const response = await emailjs.send(
+      SERVICE_ID,
+      TEMPLATE_ID,
+      {
+        to_email: "nasrollah.rzi@gmail.com",
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject || "Neue Kontaktanfrage",
+        message: formData.message,
+        phone: formData.phone || "Nicht angegeben",
+      },
+      PUBLIC_KEY,
+    );
 
     return { success: true, message: "Email erfolgreich versendet!" };
   } catch (error) {
-    console.error("EmailJS Error:", error);
+    console.error("EmailJS Error:", error?.text || error);
     return { success: false, message: "Fehler beim Versenden der Email" };
   }
 };

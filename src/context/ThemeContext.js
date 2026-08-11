@@ -1,42 +1,44 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export const ThemeContext = createContext();
+const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    // Check localStorage for saved theme
-    const saved = localStorage.getItem("theme");
-    if (saved) return saved === "dark";
-    // Check system preference
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
+  const [isDark, setIsDark] = useState(true);
 
+  // Load theme from localStorage on mount
   useEffect(() => {
-    // Save to localStorage
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      const dark = savedTheme === 'dark';
+      setIsDark(dark);
+      updateTheme(dark);
+    } else {
+      updateTheme(true); // Default to dark theme
+    }
+  }, []);
 
-    // Apply theme with smooth transition
+  const updateTheme = (dark) => {
     const root = document.documentElement;
-    
-    // Add transitioning class for smooth animation
     root.classList.add('theme-transitioning');
     
-    if (isDark) {
-      root.classList.add("dark-theme");
-      root.classList.remove("light-theme");
+    if (dark) {
+      root.classList.remove('light-theme');
+      root.classList.add('dark-theme');
     } else {
-      root.classList.add("light-theme");
-      root.classList.remove("dark-theme");
+      root.classList.remove('dark-theme');
+      root.classList.add('light-theme');
     }
     
-    // Remove transitioning class after animation completes
     setTimeout(() => {
       root.classList.remove('theme-transitioning');
     }, 400);
-  }, [isDark]);
+  };
 
   const toggleTheme = () => {
-    setIsDark((prev) => !prev);
+    const newDark = !isDark;
+    setIsDark(newDark);
+    updateTheme(newDark);
+    localStorage.setItem('theme', newDark ? 'dark' : 'light');
   };
 
   return (
@@ -47,9 +49,9 @@ export const ThemeProvider = ({ children }) => {
 };
 
 export const useTheme = () => {
-  const context = React.useContext(ThemeContext);
+  const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme must be used within ThemeProvider");
+    throw new Error('useTheme must be used within ThemeProvider');
   }
   return context;
 };

@@ -1,255 +1,283 @@
+/* ===== ULTRA MODERN SERVICES SECTION ===== */
 .Services {
-  background: linear-gradient(135deg, #1f2731 0%, #2a3f5f 100%);
-  color: white;
-  padding: 4rem 2rem;
-  min-height: 100vh;
+  padding: var(--section-padding) 2rem;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
 }
 
-:root.light-theme .Services {
-  background: linear-gradient(135deg, #f4e9ae 0%, #e4d588 100%);
-  color: #1f2731;
-}
-
-:root.light-theme .Services .services-header h1 {
-  color: #1f2731;
-}
-
-:root.light-theme .Services .services-header .subtitle {
-  color: #2f3a4a;
-}
-
-:root.light-theme .Services .service-card h3 {
-  color: #1f2731;
-}
-
-:root.light-theme .Services .service-card p {
-  color: #1f2731;
-}
-
-:root.light-theme .service-card {
-  background: #fff;
-  border: 1px solid #1f2731;
-  box-shadow: 0 12px 28px rgba(31, 39, 49, 0.12);
-}
-
-:root.light-theme .service-card:hover {
-  background: #f4e9ae;
-  border-color: #1f2731;
-  box-shadow: 0 15px 36px rgba(31, 39, 49, 0.18);
-}
-
-:root.light-theme .service-icon {
-  color: #1f2731;
-}
-
-:root.light-theme .service-card:hover .service-icon {
-  color: #1f2731;
+.Services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent)
 }
 
 .services-container {
-  max-width: 1200px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
+/* Section Header */
 .services-header {
   text-align: center;
-  margin-bottom: 4rem;
-  animation: fadeInDown 0.8s ease-out;
+  margin-bottom: 5rem;
 }
 
 .services-header h1 {
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   margin-bottom: 1rem;
-  color: #e4d588;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services-header .subtitle {
-  font-size: 1.3rem;
-  color: #b0c4ff;
-  font-weight: 300;
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 /* Services Grid */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 6rem;
 }
 
+/* Service Card */
 .service-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.005) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
   padding: 2.5rem;
-  border-radius: 15px;
-  border: 1px solid rgba(228, 213, 136, 0.2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  text-align: center;
-  animation: fadeInUp 0.8s ease-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.1) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
 .service-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-10px);
-  border-color: #e4d588;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-12px);
+  border-color: rgba(244, 63, 94, 0.25);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
 }
 
+.service-card:hover::before {
+  opacity: 0.03;
+}
+
+.service-card:hover::after {
+  opacity: 1;
+}
+
+/* Service Icon */
 .service-icon {
-  font-size: 3.5rem;
-  color: #b0c4ff;
-  transition: color 0.3s ease;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
 }
 
 .service-card:hover .service-icon {
-  color: #e4d588;
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 15px 40px rgba(244, 63, 94, 0.4);
+}
+
+.service-icon svg {
+  font-size: 1.75rem;
+  color: white;
 }
 
 .service-card h3 {
-  font-size: 1.5rem;
-  color: #b0c4ff;
-  margin: 0;
-  transition: color 0.3s ease;
-}
-
-.service-card:hover h3 {
-  color: #e4d588;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.875rem;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
 }
 
 .service-card p {
-  color: #d0d0d0;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
 }
 
 /* Process Section */
 .process-section {
-  margin-top: 4rem;
+  padding-top: 2rem;
 }
 
 .process-section h2 {
-  font-size: 2.5rem;
-  color: #e4d588;
-  margin-bottom: 3rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
-}
-
-:root.light-theme .process-section h2 {
-  color: #1f2731;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
 }
 
 .process-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  --process-gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  display: flex;
 }
+
+.process-grid::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-size: 200% 100%;
+  animation: slide-line 8s linear infinite;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.process-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--process-gap);
+  width: max-content;
+  animation: marquee 44s linear infinite;
+  will-change: transform;
+  /* add a small padding-right so there's a gap between end and start — avoids abrupt overlap */
+  padding-right: var(--process-gap);
+}
+
 
 .process-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
   padding: 2rem;
-  border-radius: 15px;
-  border: 1px solid rgba(228, 213, 136, 0.2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
   text-align: center;
-  animation: fadeInUp 0.8s ease-out;
+  transition: all 0.4s ease;
   position: relative;
-}
-
-:root.light-theme .process-card {
-  background: #fff;
-  border: 1px solid #1f2731;
-  box-shadow: 0 12px 28px rgba(31, 39, 49, 0.12);
-  color: #1f2731;
+  z-index: 1;
+  flex: 0 0 240px;
 }
 
 .process-card:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-5px);
-  border-color: #e4d588;
-}
-
-:root.light-theme .process-card:hover {
-  background: #f4e9ae;
-  border-color: #1f2731;
-  box-shadow: 0 15px 36px rgba(31, 39, 49, 0.18);
+  transform: translateY(-8px);
+  border-color: rgba(244, 63, 94, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .process-number {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: rgba(228, 213, 136, 0.3);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 1rem;
   line-height: 1;
-}
-
-:root.light-theme .process-number {
-  color: #1f2731;
   opacity: 0.8;
 }
 
 .process-card h3 {
-  font-size: 1.4rem;
-  color: #b0c4ff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
-:root.light-theme .process-card h3 {
-  color: #1f2731;
-}
-
 .process-card p {
-  color: #d0d0d0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0;
-}
-
-:root.light-theme .process-card p {
-  color: #1f2731;
-}
-
-/* Animations */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-grid::before {
+    display: none;
+  }
+
+  .process-track {
+    animation: none;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .process-card {
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+}
+
 @media (max-width: 768px) {
   .Services {
-    padding: 2rem 1rem;
+    padding: 4rem 1.25rem;
+  }
+
+  .services-header {
+    margin-bottom: 3rem;
   }
 
   .services-header h1 {
     font-size: 2rem;
   }
 
+  .services-header .subtitle {
+    font-size: 1rem;
+  }
+
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    margin-bottom: 4rem;
   }
 
   .service-card {
@@ -257,36 +285,79 @@
   }
 
   .service-icon {
-    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-icon svg {
+    font-size: 1.5rem;
   }
 
   .service-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .process-section h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .process-grid {
-    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  .process-card {
+    padding: 1.5rem;
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+
+  .process-number {
+    font-size: 2.5rem;
+  }
+
+  .process-card h3 {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .Services {
+    padding: 3rem 1rem;
+  }
+
   .services-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .service-card {
     padding: 1.5rem;
   }
 
-  .process-card {
-    padding: 1.5rem;
+  .process-grid {
+    overflow: visible;
   }
 
-  .process-number {
-    font-size: 2.5rem;
+  .process-card {
+    padding: 1.75rem;
+    flex: 1 1 100%;
+  }
+}
+
+@keyframes slide-line {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

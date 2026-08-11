@@ -10,11 +10,13 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/imprint" element={<Imprint />} />
-        <Route path="/privacy" element={<Privacy />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/imprint" element={<Imprint />} />
+          <Route path="/privacy" element={<Privacy />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );

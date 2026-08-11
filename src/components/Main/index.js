@@ -1,28 +1,38 @@
+import { useEffect } from "react";
 import Home from "../../Pages/Home";
 import About from "../../Pages/About";
 import Services from "../../Pages/Services";
 import Blog from "../../Pages/Home/Blog";
 import Contact from "../../Pages/Contact";
-import { useAOS } from "../../hooks/useAOS";
 
 const Main = () => {
-  useAOS();
+  useEffect(() => {
+    if (window.location.hash) {
+      const sectionId = window.location.hash.substring(1);
+      const element = document.getElementById(sectionId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, []);
 
   return (
     <main>
-      <div id="home" data-aos="fade-up">
+      <div id="home">
         <Home />
       </div>
-      <div id="about" data-aos="fade-up">
+      <div id="about">
         <About />
       </div>
-      <div id="services" data-aos="fade-up">
+      <div id="services">
         <Services />
       </div>
-      <div id="blog" data-aos="fade-up">
+      <div id="blog">
         <Blog />
       </div>
-      <div id="contact" data-aos="fade-up">
+      <div id="contact">
         <Contact />
       </div>
     </main>
